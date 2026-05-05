@@ -213,6 +213,10 @@ Runtime substitution uses `${user_config.KEY}`:
 - **`.mcp.json`** — already wired for `GOOGLE_API_KEY` and `DATA_COMMONS_API_KEY` headers. The converter rewrites `${user_config.KEY}` → `${KEY}` for non-Claude extensions (Codex, Gemini, OpenCode, Copilot) since those platforms fall back to shell env vars.
 - **Command / agent bodies** — non-sensitive values can be referenced (e.g. `${user_config.organisation_name}` in a Document Control block). Sensitive values are never substituted into prompt content.
 
+#### MCP `alwaysLoad` (v2.1.121)
+
+Per-server `"alwaysLoad": true` in `.mcp.json` skips Claude Code's tool-search deferral so the server's tools are loaded eagerly at session start. ArcKit sets it on `aws-knowledge` and `microsoft-learn` because the AWS/Azure research commands always reach for these on the first turn — eager loading removes a discovery round-trip. Other MCP servers (`google-developer-knowledge`, `datacommons-mcp`, `govreposcrape`) remain deferred since they're only used by specific commands. The `alwaysLoad` field is passed through unchanged for the Codex/Gemini/OpenCode extensions; those platforms ignore unknown keys.
+
 ### Plugin Monitors
 
 Background monitors declared via the `monitors` key in `arckit-claude/.claude-plugin/plugin.json` (v2.1.105+). Each entry runs as a persistent subprocess in the session's working directory; stdout lines are delivered to Claude as session notifications.
@@ -260,6 +264,32 @@ Stamped fields:
 - **Stamped at** — ISO 8601 timestamp (per write)
 
 If neither effort nor build context is available (e.g. a non-ArcKit command edited the file), the hook skips stamping entirely — no empty block. Existing artefacts pre-dating the hook are stamped on the next Write/Edit.
+
+When a stamp is actually written, the hook emits `hookSpecificOutput.updatedToolOutput` (Claude Code v2.1.121+) so the model sees a one-line summary — effort requested vs. effective, downgrade reason if any, and (on Write) a confirmation that `docs/manifest.json` was auto-updated by `update-manifest.mjs` upstream. On no-op runs (no harness fields, file unchanged) the hook stays silent and the original tool output is preserved.
+
+#### Manifest auto-update (`update-manifest.mjs`)
+
+Companion PostToolUse hook on `Write` against `projects/**` that incrementally updates `docs/manifest.json` so the documentation site stays current without a full `/arckit:pages` re-run. On a successful update it emits `hookSpecificOutput.updatedToolOutput` with the document ID and target slot (e.g. `ARC-001-REQ-v1.0 → 001-test/documents`). Because `provenance-stamp.mjs` runs after this hook and overwrites its `updatedToolOutput`, the manifest signal is re-surfaced from `provenance-stamp.mjs` whenever a `docs/manifest.json` exists.
+
+#### Session telemetry (`telemetry.mjs` + `session-learner.mjs`)
+
+Lightweight telemetry recorder registered for three events:
+
+- **PostToolUse** (matcher `.*`) — records `{ tool, duration_ms }` for every tool call (Claude Code v2.1.119+ `duration_ms` field). Pure-latency records exclude `TaskCreate` and `mcp__govreposcrape__*` calls so the duration histogram isn't polluted by long-running async tools.
+- **PostToolUse** (same registration, branched by tool name) — records `{ server, tool, args }` for `mcp__govreposcrape__*` calls. Args are sanitised (long strings replaced with length markers, nested objects flattened to `<object>`) so the JSONL stays small.
+- **TaskCreated** (matcher `.*`, Claude Code v2.1.84+) — records `{ agent }` for every agent spawn via the Task tool.
+
+Events are appended to `.arckit/memory/.telemetry.jsonl` during the session. `session-learner.mjs` reads, summarises, and truncates the file at Stop / StopFailure, adding a single line to each session entry, e.g.:
+
+```text
+- **Telemetry:** 47 tool calls (p50=12ms, p95=4200ms) | 3 agents (arckit-research×2, arckit-datascout) | MCP: govreposcrape×8
+```
+
+Telemetry is best-effort — any failure (write error, malformed line, missing field) is swallowed silently so it never breaks a session.
+
+When `docs/` exists (i.e. the project has run `/arckit:pages`), `session-learner.mjs` also writes a structured rollup to `docs/telemetry.json` (newer-first, capped at 50 sessions) so the dashboard can render a "Session Telemetry" + "Recent Sessions" panel. Each record contains `{ ts, type, isFailure, commits, filesChanged, artifacts, telemetry: { toolCalls, p50, p95, agents, mcp } }`. The dashboard fetches `telemetry.json` with the same graceful-fallback pattern as `health.json` — projects without a `docs/` directory render the dashboard exactly as before.
+
+> **Note on `type: "mcp_tool"` (v2.1.118)**: This Claude Code feature lets a hook *invoke* an MCP tool as its action (alternative to `type: "command"` / `type: "prompt"`). It does **not** filter hooks to fire only on MCP tool calls. ArcKit logs `govreposcrape` calls via the existing tool-name matcher pattern (`mcp__govreposcrape__.*`); no `type: "mcp_tool"` registration is needed for telemetry.
 
 ### Project Structure Created by `arckit init`
 
@@ -477,13 +507,25 @@ git checkout main && git pull
 ./scripts/bump-version.sh X.Y.Z
 # 5. Regenerate Codex/OpenCode/Gemini formats
 python scripts/converter.py
-# 6. Commit, tag, push — GitHub Release created automatically
+# 6. Commit the bump (claude plugin tag below requires a clean tree)
 git add -A && git commit -m "chore: bump version to X.Y.Z"
+# 7. Validate plugin/marketplace version agreement (Claude Code v2.1.118+)
+claude plugin tag arckit-claude --dry-run
+# 8. (optional) Prune orphaned plugin dependencies
+claude plugin prune --dry-run
+# 9. Tag, push — GitHub Release created automatically
 git tag -a vX.Y.Z -m "vX.Y.Z"
 git push && git push --tags
-# 7. Push to extension repos (Gemini, Codex, etc.)
+# 10. Push to extension repos (Gemini, Codex, etc.)
 ./scripts/push-extensions.sh
 ```
+
+> **Note on `claude plugin tag`**: This command creates `{plugin-name}--vX.Y.Z` style tags
+> (e.g. `arckit--v4.14.0`), which would not trigger `.github/workflows/release.yml` (it
+> matches `v[0-9]+.[0-9]+.[0-9]+`). We use `--dry-run` for its validation behaviour only —
+> it cross-checks `arckit-claude/.claude-plugin/plugin.json` against the marketplace entry
+> in `.claude-plugin/marketplace.json` and exits non-zero on mismatch, catching version
+> drift before the real `git tag -a vX.Y.Z` runs.
 
 **Adding new package data files**: Update `pyproject.toml` `[tool.hatch.build.targets.wheel.shared-data]`
 

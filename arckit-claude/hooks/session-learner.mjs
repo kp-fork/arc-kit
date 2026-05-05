@@ -17,7 +17,7 @@
  * Output (stdout): empty (notification hook, no output required)
  */
 
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { isDir, isFile, readText, parseHookInput } from './hook-utils.mjs';
@@ -157,6 +157,37 @@ if (commitSummaries.length > 0) {
   }
 }
 
+// ── Telemetry summary (Claude Code v2.1.84 / v2.1.118 / v2.1.119) ──
+// Read .telemetry.jsonl written by telemetry.mjs across the session.
+// Two outputs:
+//   1. Prose one-liner appended to the session entry below (sessions.md)
+//   2. Structured rollup written to docs/telemetry.json (newer-first,
+//      capped at 50) so the pages dashboard can render a "Recent Activity"
+//      panel without extra fetches.
+// Silent when the file is absent or empty. Truncate after reading so the
+// next session starts clean.
+const telemetryFile = join(memoryDir, '.telemetry.jsonl');
+let telemetryRollup = null;
+if (isFile(telemetryFile)) {
+  const raw = readText(telemetryFile) || '';
+  const events = [];
+  for (const line of raw.split('\n')) {
+    if (!line.trim()) continue;
+    try {
+      events.push(JSON.parse(line));
+    } catch {
+      // skip malformed line — telemetry must never break a session
+    }
+  }
+  if (events.length > 0) {
+    const summary = summariseTelemetry(events);
+    if (summary) entry += `- **Telemetry:** ${summary}\n`;
+    telemetryRollup = rollupTelemetry(events);
+  }
+  // Truncate (delete) so next session starts clean. Failure is non-fatal.
+  try { unlinkSync(telemetryFile); } catch { /* ignore */ }
+}
+
 // Ensure memory directory exists
 mkdirSync(memoryDir, { recursive: true });
 
@@ -184,7 +215,174 @@ const output = header.trimEnd() + '\n\n' + trimmed.join('\n') + '\n';
 
 writeFileSync(sessionsFile, output);
 
+// ── Dashboard rollup (docs/telemetry.json) ────────────────────────────
+// Persist a structured per-session record so the pages dashboard can show
+// a "Recent Activity" panel. Only write when docs/ already exists (i.e.
+// the project has run /arckit:pages) — we don't want to materialise a
+// docs/ directory just for telemetry. Failure is non-fatal.
+const docsDir = join(cwd, 'docs');
+if (isDir(docsDir)) {
+  const dashboardFile = join(docsDir, 'telemetry.json');
+  let dashboard = { generated: now.toISOString(), sessions: [] };
+  if (isFile(dashboardFile)) {
+    try {
+      const parsed = JSON.parse(readText(dashboardFile) || '{}');
+      if (Array.isArray(parsed.sessions)) dashboard.sessions = parsed.sessions;
+    } catch {
+      // Corrupt file — start over rather than fail.
+    }
+  }
+
+  const sessionRecord = {
+    ts: now.toISOString(),
+    type: entryType,
+    isFailure,
+    commits: commitCount,
+    filesChanged: files.length,
+    artifacts: serialiseArtifacts(projectArtifacts),
+  };
+  if (telemetryRollup) sessionRecord.telemetry = telemetryRollup;
+
+  // Newer-first; cap at 50 (≈ a few weeks of daily use).
+  dashboard.sessions.unshift(sessionRecord);
+  dashboard.sessions = dashboard.sessions.slice(0, 50);
+  dashboard.generated = now.toISOString();
+
+  try {
+    writeFileSync(dashboardFile, JSON.stringify(dashboard, null, 2));
+  } catch {
+    // Non-fatal — telemetry must never break a session.
+  }
+}
+
 // Write timestamp for next session boundary
 writeFileSync(lastSessionFile, now.toISOString());
 
 process.exit(0);
+
+// ── Helpers ────────────────────────────────────────────────────────────
+
+/**
+ * Roll up telemetry events from telemetry.mjs into a single line for
+ * the session entry. Records:
+ *   - hook_duration{tool, duration_ms}: per-tool latency histogram
+ *   - mcp_call{server, tool, args}:     MCP call count (govreposcrape only)
+ *   - agent_spawn{agent}:               agent spawn counts
+ *
+ * Returns a one-line string or null if nothing meaningful to report.
+ */
+function summariseTelemetry(events) {
+  const durationsByTool = new Map(); // tool → array of duration_ms
+  const mcpCalls = new Map();        // server → count
+  const agentSpawns = new Map();     // agent → count
+
+  for (const ev of events) {
+    if (ev.kind === 'hook_duration' && ev.tool && typeof ev.duration_ms === 'number') {
+      if (!durationsByTool.has(ev.tool)) durationsByTool.set(ev.tool, []);
+      durationsByTool.get(ev.tool).push(ev.duration_ms);
+    } else if (ev.kind === 'mcp_call' && ev.server) {
+      mcpCalls.set(ev.server, (mcpCalls.get(ev.server) || 0) + 1);
+    } else if (ev.kind === 'agent_spawn' && ev.agent) {
+      agentSpawns.set(ev.agent, (agentSpawns.get(ev.agent) || 0) + 1);
+    }
+  }
+
+  const parts = [];
+
+  if (durationsByTool.size > 0) {
+    // Compute total tool calls and overall p50/p95
+    const all = [];
+    for (const arr of durationsByTool.values()) all.push(...arr);
+    all.sort((a, b) => a - b);
+    const p50 = all[Math.floor(all.length * 0.5)];
+    const p95 = all[Math.floor(all.length * 0.95)];
+    parts.push(`${all.length} tool calls (p50=${p50}ms, p95=${p95}ms)`);
+  }
+
+  if (agentSpawns.size > 0) {
+    const total = [...agentSpawns.values()].reduce((a, b) => a + b, 0);
+    const top = [...agentSpawns.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 3)
+      .map(([a, n]) => (n > 1 ? `${a}×${n}` : a))
+      .join(', ');
+    parts.push(`${total} agent${total === 1 ? '' : 's'} (${top})`);
+  }
+
+  if (mcpCalls.size > 0) {
+    const top = [...mcpCalls.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .map(([s, n]) => `${s}×${n}`)
+      .join(', ');
+    parts.push(`MCP: ${top}`);
+  }
+
+  return parts.length > 0 ? parts.join(' | ') : null;
+}
+
+/**
+ * Same input as summariseTelemetry, but returns a structured object for
+ * docs/telemetry.json. Shape matches what the pages dashboard renders:
+ *
+ *   {
+ *     toolCalls: 47,
+ *     p50: 12,
+ *     p95: 4200,
+ *     agents: [{name: "arckit-research", count: 2}, ...],
+ *     mcp:    [{server: "govreposcrape", count: 8}, ...]
+ *   }
+ *
+ * Returns null when there are no meaningful events.
+ */
+function rollupTelemetry(events) {
+  const all = [];
+  const agents = new Map();
+  const mcp = new Map();
+
+  for (const ev of events) {
+    if (ev.kind === 'hook_duration' && typeof ev.duration_ms === 'number') {
+      all.push(ev.duration_ms);
+    } else if (ev.kind === 'mcp_call' && ev.server) {
+      mcp.set(ev.server, (mcp.get(ev.server) || 0) + 1);
+    } else if (ev.kind === 'agent_spawn' && ev.agent) {
+      agents.set(ev.agent, (agents.get(ev.agent) || 0) + 1);
+    }
+  }
+
+  if (all.length === 0 && agents.size === 0 && mcp.size === 0) return null;
+
+  const result = {};
+  if (all.length > 0) {
+    all.sort((a, b) => a - b);
+    result.toolCalls = all.length;
+    result.p50 = all[Math.floor(all.length * 0.5)];
+    result.p95 = all[Math.floor(all.length * 0.95)];
+  }
+  if (agents.size > 0) {
+    result.agents = [...agents.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, count]) => ({ name, count }));
+  }
+  if (mcp.size > 0) {
+    result.mcp = [...mcp.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .map(([server, count]) => ({ server, count }));
+  }
+  return result;
+}
+
+/**
+ * Convert the projectArtifacts Map<projectNum, Map<category, Set<typeName>>>
+ * into a plain JSON-serialisable shape for docs/telemetry.json.
+ */
+function serialiseArtifacts(projectArtifactsMap) {
+  const out = [];
+  for (const [projNum, catMap] of [...projectArtifactsMap.entries()].sort()) {
+    const categories = {};
+    for (const [category, names] of catMap) {
+      categories[category] = [...names].sort();
+    }
+    out.push({ project: projNum, categories });
+  }
+  return out;
+}
