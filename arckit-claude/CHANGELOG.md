@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.15.2] - 2026-05-05
+
+Documentation-only patch fixing a citation-traceability gap that only surfaced in research-agent output.
+
+### Fixed
+
+- **Citation traceability now covers MCP queries and web fetches (#283, #437).** `references/citation-instructions.md` previously only described how to cite files under `external/`, `policies/`, `vendors/`. The 10 research agents (`gov-reuse`, `research`, `datascout`, `aws-research`, `azure-research`, `gcp-research`, `gov-code-search`, `gov-landscape`, `grants`, `framework`) gather most of their evidence via MCP servers (govreposcrape, AWS Knowledge, Microsoft Learn, Google Developer Knowledge, DataCommons) and WebFetch, which left the External References section empty even when the body referenced GitHub URLs and MCP findings inline. The same Document Register / Citations / Unreferenced Documents tables now cover three source types — **Document** (unchanged), **MCP Query** (per-server prefix plus `Q`-index, one row per unique query), and **Web URL** (`WEB-N`, one row per unique fetched URL). WebSearch remains exploratory and does not produce citations. Two new categories added: `Reuse Evidence` and `Market Evidence`. No template changes were needed — the existing 5-column structure is reused. No agent file changes — all 10 research agents already point at `citation-instructions.md` via a shared one-line directive.
+
 ## [4.15.1] - 2026-05-05
 
 Documentation-only patch covering the Claude Code Remote Control + push notifications pattern across the research-heavy guides.
