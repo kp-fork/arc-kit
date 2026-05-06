@@ -113,8 +113,10 @@ git status --porcelain | grep -v "memory/"
 
 **Verification:**
 ```bash
-# Confirm the new regime code appears in BOTH the array and the labels object
-grep -nE "^export const REGIMES|^export const REGIME_LABELS|^  [A-Z]+:" arckit-claude/config/doc-types.mjs | head -20
+# Confirm the new regime code appears in BOTH the array and the labels object.
+# Anchor on the export blocks (avoids matching every doc-type entry as noise).
+grep -nA 1 "^export const REGIMES" arckit-claude/config/doc-types.mjs
+grep -nA 12 "^export const REGIME_LABELS" arckit-claude/config/doc-types.mjs
 # Then cross-check against the regime values declared on new doc-types
 grep -oE "regime: '[A-Z]+'" arckit-claude/config/doc-types.mjs | sort -u
 ```
@@ -198,8 +200,9 @@ grep -n "generate-document-id.sh [A-Z]\+ --filename" arckit-claude/commands/<pre
 # B4: converter drift
 python scripts/converter.py && git status --porcelain | grep -v "memory/"
 
-# B5: regime registration
-grep -nE "^export const REGIMES|^  [A-Z]+:" arckit-claude/config/doc-types.mjs | head -10
+# B5: regime registration (anchored on export blocks to avoid doc-type noise)
+grep -nA 1 "^export const REGIMES" arckit-claude/config/doc-types.mjs
+grep -nA 12 "^export const REGIME_LABELS" arckit-claude/config/doc-types.mjs
 grep -oE "regime: '[A-Z]+'" arckit-claude/config/doc-types.mjs | sort -u
 
 # Recipe schema
