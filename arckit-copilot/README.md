@@ -1,50 +1,53 @@
-# ArcKit for OpenCode
+# ArcKit for GitHub Copilot
 
-OpenCode extension for ArcKit, an enterprise architecture governance and vendor
-procurement toolkit.
+GitHub Copilot prompt and agent bundle for ArcKit, an enterprise architecture
+governance and vendor procurement toolkit.
 
 This repository is generated from the main ArcKit source repository:
 https://github.com/tractorjuice/arc-kit
 
 ## What Is Included
 
-- 116 ArcKit commands under `commands/`
-- 10 research and specialist agents under `agents/`
+- 116 reusable Copilot prompts under `prompts/`
+- 10 custom agent definitions under `agents/`
+- Project instructions in `copilot-instructions.md`
 - 112 document templates under `templates/`
 - Handoff schemas and scoring rubrics under `schemas/`
 - Helper scripts under `scripts/`
-- MCP configuration in `opencode.json`
 
 ## Install
 
-Use the ArcKit CLI to scaffold a project configured for OpenCode:
+Use the ArcKit CLI to scaffold a project configured for GitHub Copilot:
 
 ```bash
 pip install git+https://github.com/tractorjuice/arc-kit.git
-arckit init my-project --ai opencode
+arckit init my-project --ai copilot
 cd my-project
-opencode
 ```
 
 Or with `uv`:
 
 ```bash
 uv tool install arckit-cli --from git+https://github.com/tractorjuice/arc-kit.git
-arckit init my-project --ai opencode
+arckit init my-project --ai copilot
 ```
+
+The CLI copies prompts into `.github/prompts/` and instructions into the project
+so Copilot Chat can use them.
 
 ## Usage
 
-ArcKit commands are available in OpenCode with `/arckit.<command>`:
+Open Copilot Chat in the generated project and invoke ArcKit prompts from the
+prompt picker or by typing `/`:
 
 ```text
-/arckit.plan
-/arckit.principles
-/arckit.requirements
-/arckit.risk
-/arckit.sow
-/arckit.evaluate
-/arckit.health
+arckit-plan
+arckit-principles
+arckit-requirements
+arckit-risk
+arckit-sow
+arckit-evaluate
+arckit-health
 ```
 
 ## Updating
