@@ -190,6 +190,7 @@ def test_codex_readme_documents_plugin_hook_setup():
 
     assert "codex plugin marketplace add tractorjuice/arckit-codex" in readme
     assert "hooks = true" in readme
+    assert "plugin_hooks = true" in readme
     assert "hooks/hooks.json" in readme
 
 
@@ -223,6 +224,7 @@ def test_codex_hooks_are_configured_in_manifest_and_standalone_config():
     }
     assert CODEX_HOOK_RUNNER.is_file()
     assert config["features"]["hooks"] is True
+    assert config["features"]["plugin_hooks"] is True
 
     configured_events = set(config["hooks"])
     assert {

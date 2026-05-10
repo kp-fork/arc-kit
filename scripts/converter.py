@@ -669,6 +669,7 @@ def generate_codex_config_toml(mcp_json_path, agents_dir, output_path):
         "",
         "[features]",
         "hooks = true",
+        "plugin_hooks = true",
         "",
         "# ── Lifecycle Hooks ─────────────────────────────────",
         "# Resolve hook scripts from the git root so Codex can start in subdirectories.",
