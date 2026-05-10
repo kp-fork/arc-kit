@@ -295,7 +295,7 @@
                 "step": [
                     { "@type": "HowToStep", "position": 1, "name": "Choose Your AI Platform", "text": "Pick Claude Code (premier), Gemini CLI, Codex CLI, OpenCode CLI, or GitHub Copilot." },
                     { "@type": "HowToStep", "position": 2, "name": "Install Your AI Tool", "text": "Install Claude Code, Gemini CLI, Codex CLI, OpenCode CLI, or GitHub Copilot using the platform-specific installer." },
-                    { "@type": "HowToStep", "position": 3, "name": "Install ArcKit", "text": "Add the ArcKit plugin (Claude Code), extension (Gemini CLI), or run arckit init (Codex/OpenCode/Copilot)." },
+                    { "@type": "HowToStep", "position": 3, "name": "Install ArcKit", "text": "Add the ArcKit plugin (Claude Code and Codex CLI), extension (Gemini CLI), or run arckit init (OpenCode/Copilot)." },
                     { "@type": "HowToStep", "position": 4, "name": "Open Your Project", "text": "Navigate to your project directory and launch your chosen AI tool." },
                     { "@type": "HowToStep", "position": 5, "name": "Get Oriented", "text": "Run the start command to see project status and recommended next steps." },
                     { "@type": "HowToStep", "position": 6, "name": "Follow GDS Phases", "text": "Use ArcKit commands to generate artifacts for Discovery, Alpha, and Beta phases." }
@@ -462,17 +462,15 @@ gemini</code></pre></div>
 
                 <div class="app-step">
                     <span class="app-step__number">2</span>
-                    <h2 class="govuk-heading-m app-step__title">Install ArcKit CLI &amp; Initialize Project</h2>
-                    <p class="govuk-body">Install the ArcKit CLI, then initialize your project:</p>
-                    <div class="app-code-block"><pre><code># Install with pip
-pip install git+https://github.com/tractorjuice/arc-kit.git
-
-# Or with uv (recommended)
-uv tool install arckit-cli --from git+https://github.com/tractorjuice/arc-kit.git
-
-# Initialize project
-arckit init my-project --ai codex</code></pre></div>
-                    <p class="govuk-body govuk-!-margin-top-3">This copies 120 Codex skills (116 command skills plus 4 reference skills), 10 agent configs, lifecycle hooks, MCP config, templates, schemas, and scripts into your project. Use <code>--minimal</code> to skip docs and guides.</p>
+                    <h2 class="govuk-heading-m app-step__title">Install ArcKit Plugin</h2>
+                    <p class="govuk-body">Add the ArcKit Codex marketplace:</p>
+                    <div class="app-code-block"><pre><code>codex plugin marketplace add tractorjuice/arckit-codex</code></pre></div>
+                    <p class="govuk-body govuk-!-margin-top-3">Enable lifecycle hooks in your user or project Codex config:</p>
+                    <div class="app-code-block"><pre><code># ~/.codex/config.toml or .codex/config.toml
+[features]
+codex_hooks = true</code></pre></div>
+                    <p class="govuk-body govuk-!-margin-top-3">Restart Codex, run <code>/plugins</code>, choose <strong>ArcKit Plugins</strong>, then install and enable <strong>ArcKit</strong>. The plugin bundles 120 skills, 10 agent configs, MCP config, templates, schemas, scripts, and <code>hooks/hooks.json</code>.</p>
+                    <p class="govuk-body govuk-!-margin-top-2">Prefer a project-scoped copy instead? Use <code>arckit init my-project --ai codex</code> from the ArcKit CLI.</p>
                 </div>
 
                 <div class="app-step">
