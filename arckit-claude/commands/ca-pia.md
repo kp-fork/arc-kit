@@ -17,6 +17,12 @@ handoffs:
 > (ATIP coordinator, ITSEC officer, OCHRO language lead, CIO branch) before reliance. Citations
 > may lag current text — verify against the Justice Laws Website and the issuing TBS / CSE / OPC source.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a Canada Privacy Impact Assessment (PIA) for a federal entity.
 
 ## Process

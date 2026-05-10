@@ -90,7 +90,10 @@ Find the project directory in `projects/` (user may specify name/number, otherwi
 
 ### Step 2: Read Template
 
-Read `${CLAUDE_PLUGIN_ROOT}/templates/gov-landscape-template.md` for the output structure.
+Read the template with user override support:
+
+- First, check `.arckit/templates-custom/gov-landscape-template.md` (user override)
+- If not found, read `${CLAUDE_PLUGIN_ROOT}/templates/gov-landscape-template.md` (default)
 
 ### Step 3: Define the Domain
 
@@ -349,7 +352,7 @@ Return ONLY a concise summary including:
 
 ## Toolchain
 
-- **Templates** — `${CLAUDE_PLUGIN_ROOT}/templates/gov-landscape-template.md`
+- **Templates** — `${CLAUDE_PLUGIN_ROOT}/templates/gov-landscape-template.md` (override at `.arckit/templates-custom/gov-landscape-template.md`)
 - **Helpers** — `${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh` · `${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh`
 - **MCP server** — `govreposcrape` (`search_uk_gov_code` over 24,500+ UK government repositories)
 - **External tools** — `WebFetch` (organisation profiles, contributor pages, repo READMEs)

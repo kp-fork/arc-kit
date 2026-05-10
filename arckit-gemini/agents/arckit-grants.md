@@ -181,7 +181,7 @@ Include a rationale for each score explaining what matches and what gaps exist.
 ### Step 7: Read Template and Write Report
 
 1. **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/grants-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/grants-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Run `cat ~/.gemini/extensions/arckit/templates/grants-template.md` to read the file (default)
 
@@ -263,7 +263,7 @@ Return ONLY a concise summary including:
 
 ## Toolchain
 
-- **Templates** — `~/.gemini/extensions/arckit/templates/grants-template.md` (override at `.arckit/templates/grants-template.md`)
+- **Templates** — `~/.gemini/extensions/arckit/templates/grants-template.md` (override at `.arckit/templates-custom/grants-template.md`)
 - **Helpers** — `~/.gemini/extensions/arckit/scripts/bash/create-project.sh` · `~/.gemini/extensions/arckit/scripts/bash/generate-document-id.sh`
 - **External tools** — `WebSearch` · `WebFetch` (no MCP)
 - **Related commands** — `/arckit:requirements` (input) · `/arckit:stakeholders` (input) · `/arckit:sobc` (downstream business case)

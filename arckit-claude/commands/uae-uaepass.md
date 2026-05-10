@@ -3,13 +3,19 @@ description: "[COMMUNITY] Generate UAE Pass integration design (OIDC/OAuth flow,
 argument-hint: "<project ID or service name>"
 effort: high
 handoffs:
-  - command: integration
+  - command: platform-design
     description: UAE Pass OIDC endpoints and claim mapping feed the wider integration specification.
   - command: adr
     description: Profile selection (Basic vs Verified) and e-signature mechanism are architecturally significant decisions that warrant an ADR.
 ---
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
+
+## User Request
+
+```text
+$ARGUMENTS
+```
 
 You are an enterprise architect generating a UAE Pass integration design for a UAE federal entity service provider.
 

@@ -4,6 +4,12 @@ description: "[COMMUNITY] Generate UAE Pass integration design (OIDC/OAuth flow,
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a UAE Pass integration design for a UAE federal entity service provider.
 
 ## Process
@@ -44,5 +50,5 @@ UAE Pass developer documentation (TDRA + ICP). Primary URL: <https://docs.uaepas
 
 After completing this command, consider running:
 
-- `/arckit:integration` -- UAE Pass OIDC endpoints and claim mapping feed the wider integration specification.
+- `/arckit:platform-design` -- UAE Pass OIDC endpoints and claim mapping feed the wider integration specification.
 - `/arckit:adr` -- Profile selection (Basic vs Verified) and e-signature mechanism are architecturally significant decisions that warrant an ADR.

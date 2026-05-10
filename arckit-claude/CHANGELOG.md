@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.20.0] - 2026-05-10
+
+### Changed
+
+- **Extension release sync for Codex plugin packaging.** Regenerated downstream extension formats from the shared ArcKit command sources and release tooling. Claude plugin runtime behavior is unchanged; this release primarily adds Codex plugin hooks, metadata, schemas, and standalone packaging in the generated Codex distribution.
+
 ## [4.19.2] - 2026-05-07
 
 ### Changed

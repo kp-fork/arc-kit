@@ -6,6 +6,12 @@ tools: ['readFile', 'editFiles', 'runCommand', 'codebase', 'search']
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
 
+## User Request
+
+```text
+${input:topic:Enter project name or topic}
+```
+
 You are an enterprise architect generating a Data Sharing Agreement under the UAE Government Services Data Sharing Policy ("collect once, use securely").
 
 ## Process
@@ -46,5 +52,5 @@ UAE Government Services Data Sharing Policy ("collect once, use securely") — C
 
 After completing this command, consider running:
 
-- `/arckit-integration` -- Federation and API mechanisms feed the integration specification.
+- `/arckit-platform-design` -- Federation and API mechanisms feed the integration specification.
 - `/arckit-uae-pdpl` -- Per-share PDPL lawful basis must be reflected in the PDPL compliance assessment.

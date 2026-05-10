@@ -4,7 +4,7 @@ argument-hint: "<project ID or service name>"
 effort: high
 keep-coding-instructions: true
 handoffs:
-  - command: risks
+  - command: risk
     description: DPIA outputs feed the risk register's privacy and regulatory entries.
   - command: uae-data-sharing
     description: Per-share lawful-basis mapping continues into the data sharing agreement.
@@ -13,6 +13,12 @@ handoffs:
 ---
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
+
+## User Request
+
+```text
+$ARGUMENTS
+```
 
 You are an enterprise architect generating a UAE PDPL Compliance Assessment for a federal entity.
 

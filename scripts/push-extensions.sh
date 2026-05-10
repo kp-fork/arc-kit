@@ -120,8 +120,18 @@ for target in "${TARGETS[@]}"; do
   echo "  Changes: $CHANGED"
 
   # Commit and push
-  git commit -m "$COMMIT_MSG" --quiet
-  git push --quiet
+  if ! git commit -m "$COMMIT_MSG" --quiet; then
+    red "  Failed to commit changes for ${REPO_OWNER}/${repo_name}"
+    ((FAILED++))
+    cd "$ROOT_DIR"
+    continue
+  fi
+  if ! git push --quiet; then
+    red "  Failed to push ${REPO_OWNER}/${repo_name}"
+    ((FAILED++))
+    cd "$ROOT_DIR"
+    continue
+  fi
   green "  ✓ Pushed to ${REPO_OWNER}/${repo_name}"
   ((PUSHED++))
   cd "$ROOT_DIR"

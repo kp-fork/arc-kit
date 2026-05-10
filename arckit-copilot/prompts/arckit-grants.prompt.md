@@ -13,3 +13,4 @@ After completing this command, consider running:
 - `/arckit-sobc` -- Feed grant funding data into Economic Case
 - `/arckit-plan` -- Create project plan aligned to grant milestones
 - `/arckit-risk` -- Add grant-specific risks (rejection, compliance, reporting)
+- `/arckit-adr` -- Record funding-mix decisions

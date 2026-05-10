@@ -6,6 +6,12 @@ tools: ['readFile', 'editFiles', 'runCommand', 'codebase', 'search']
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
 
+## User Request
+
+```text
+${input:topic:Enter project name or topic}
+```
+
 You are an enterprise architect generating a federal procurement strategy under UAE Federal Decree-Law No. 11 of 2023 on Procurements in the Federal Government.
 
 ## Process

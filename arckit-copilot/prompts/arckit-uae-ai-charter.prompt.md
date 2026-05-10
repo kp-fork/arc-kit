@@ -6,6 +6,12 @@ tools: ['readFile', 'editFiles', 'runCommand', 'codebase', 'search']
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
 
+## User Request
+
+```text
+${input:topic:Enter project name or topic}
+```
+
 You are an enterprise architect generating a UAE Charter for the Development and Use of AI compliance assessment for a UAE federal entity AI system.
 
 ## Process
@@ -45,4 +51,4 @@ UAE Charter for the Development and Use of Artificial Intelligence. Primary URL:
 After completing this command, consider running:
 
 - `/arckit-uae-ai-autonomy-tier` -- Charter compliance posture feeds the per-tier guard-rail decision in the AI Autonomy Tier Posture.
-- `/arckit-risks` -- Charter gaps surface as project risks for the risk register.
+- `/arckit-risk` -- Charter gaps surface as project risks for the risk register.

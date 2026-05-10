@@ -12,6 +12,12 @@ description: "[COMMUNITY] Generate a Canada Security of Information Act handling
 > citations against the current Justice Laws Website text and Commissioner's published guidance
 > before relying on this output.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a Canada Security of Information Act handling plan for a federal information system that processes Special Operational Information or other classified material.
 
 ## Process

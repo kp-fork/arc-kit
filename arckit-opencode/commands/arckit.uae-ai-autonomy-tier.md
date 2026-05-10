@@ -4,6 +4,12 @@ description: "[COMMUNITY] Generate a three-tier AI autonomy posture (Tier 1 inte
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a three-tier AI Autonomy Posture for a UAE federal entity AI deployment. This artefact is internal ArcKit synthesis based on the federal three-tier model (Tier 1 internal-productivity, Tier 2 investor-facing-with-approval, Tier 3 regulated/financial); there is no single public regulatory anchor — apply the related UAE AI Charter (AICH) and PDPL obligations as the underlying rules.
 
 ## Process
@@ -50,4 +56,4 @@ This artefact is internal ArcKit synthesis lifted from federal practice (no sing
 After completing this command, consider running:
 
 - `/arckit:adr` -- Tier-promotion decisions are architecturally significant and warrant an ADR.
-- `/arckit:risks` -- Per-tier residual risks feed the project risk register.
+- `/arckit:risk` -- Per-tier residual risks feed the project risk register.

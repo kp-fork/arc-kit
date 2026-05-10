@@ -164,6 +164,9 @@ def get_data_paths():
             "codex_references": base_path / "arckit-codex" / "references",
             "codex_skills": base_path / "arckit-codex" / "skills",
             "codex_agents": base_path / "arckit-codex" / "agents",
+            "codex_hooks": base_path / "arckit-codex" / "hooks",
+            "codex_schemas": base_path / "arckit-codex" / "schemas",
+            "codex_validator": base_path / "arckit-codex" / "scripts" / "validate-handoff.mjs",
             "codex_config": base_path / "arckit-codex" / "config.toml",
             "copilot_prompts": base_path / "arckit-copilot" / "prompts",
             "copilot_agents": base_path / "arckit-copilot" / "agents",
@@ -242,6 +245,7 @@ def create_project_structure(
         directories.extend(
             [
                 ".codex/agents",
+                ".codex/hooks",
                 ".agents/skills",
                 ".opencode/commands",
                 ".opencode/agents",
@@ -252,6 +256,7 @@ def create_project_structure(
         if ai_assistant == "codex":
             directories.append(".agents/skills")
             directories.append(f"{agent_folder}agents")
+            directories.append(f"{agent_folder}hooks")
         elif ai_assistant == "opencode":
             directories.append(f"{agent_folder}commands")
             directories.append(f"{agent_folder}agents")
@@ -548,7 +553,31 @@ def init(
         if codex_config_src and codex_config_src.exists():
             config_dst = project_path / ".codex" / "config.toml"
             shutil.copy2(codex_config_src, config_dst)
-            console.print(f"[green]✓[/green] Copied config.toml (MCP servers + agent roles)")
+            console.print(f"[green]✓[/green] Copied config.toml (MCP servers + hooks + agent roles)")
+
+        # Copy Codex lifecycle hooks
+        codex_hooks_src = data_paths.get("codex_hooks")
+        if codex_hooks_src and codex_hooks_src.exists():
+            hooks_dst = project_path / ".codex" / "hooks"
+            hooks_dst.mkdir(parents=True, exist_ok=True)
+            for hook_file in sorted(codex_hooks_src.iterdir()):
+                if hook_file.is_file() and hook_file.name != "hooks.json":
+                    shutil.copy2(hook_file, hooks_dst / hook_file.name)
+            console.print(f"[green]✓[/green] Copied Codex lifecycle hooks to .codex/hooks/")
+
+        # Copy Codex schemas and deterministic validators used by research workflows
+        codex_schemas_src = data_paths.get("codex_schemas")
+        if codex_schemas_src and codex_schemas_src.exists():
+            schemas_dst = project_path / ".arckit" / "schemas"
+            shutil.copytree(codex_schemas_src, schemas_dst, dirs_exist_ok=True)
+            console.print(f"[green]✓[/green] Copied Codex schemas to .arckit/schemas/")
+
+        codex_validator_src = data_paths.get("codex_validator")
+        if codex_validator_src and codex_validator_src.exists():
+            validator_dst = project_path / ".arckit" / "scripts" / "validate-handoff.mjs"
+            validator_dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(codex_validator_src, validator_dst)
+            console.print(f"[green]✓[/green] Copied handoff validator to .arckit/scripts/")
 
     # Copy OpenCode commands and agents
     if ai_assistant == "opencode" or all_ai:
@@ -808,6 +837,9 @@ Example:
             "# Codex CLI",
             ".codex/*",
             "!.codex/agents/",
+            "!.codex/agents/**",
+            "!.codex/hooks/",
+            "!.codex/hooks/**",
             "!.codex/config.toml",
         ]
 

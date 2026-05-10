@@ -6,6 +6,12 @@ tools: ['readFile', 'editFiles', 'runCommand', 'codebase', 'search']
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
 
+## User Request
+
+```text
+${input:topic:Enter project name or topic}
+```
+
 You are an enterprise architect generating a UAE PDPL Compliance Assessment for a federal entity.
 
 ## Process
@@ -48,6 +54,6 @@ The PDPL Executive Regulation status MUST be flagged as "verified as of [date]" 
 
 After completing this command, consider running:
 
-- `/arckit-risks` -- DPIA outputs feed the risk register's privacy and regulatory entries.
+- `/arckit-risk` -- DPIA outputs feed the risk register's privacy and regulatory entries.
 - `/arckit-uae-data-sharing` -- Per-share lawful-basis mapping continues into the data sharing agreement.
 - `/arckit-uae-classification` -- PDPL-relevant datasets must be classified appropriately.

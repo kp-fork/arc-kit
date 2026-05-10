@@ -6,6 +6,12 @@ tools: ['readFile', 'editFiles', 'runCommand', 'codebase', 'search']
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
 
+## User Request
+
+```text
+${input:topic:Enter project name or topic}
+```
+
 You are an enterprise architect generating a UAE IAS Statement of Applicability for a federal entity or Critical Information Infrastructure (CII) operator.
 
 ## Process
@@ -43,5 +49,5 @@ UAE Information Assurance Standard (IAS), published by the UAE Cybersecurity Cou
 
 After completing this command, consider running:
 
-- `/arckit-risks` -- IAS gaps and risk-treatment plan feed the project risk register.
+- `/arckit-risk` -- IAS gaps and risk-treatment plan feed the project risk register.
 - `/arckit-uae-cloud-residency` -- IAS technical controls (T-family) constrain residency and CSP choice.

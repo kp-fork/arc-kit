@@ -9,6 +9,12 @@ tools: ['readFile', 'editFiles', 'runCommand', 'codebase', 'search']
 > (ATIP coordinator, ITSEC officer, OCHRO language lead, CIO branch) before reliance. Citations
 > may lag current text — verify against the Justice Laws Website and the issuing TBS / CSE / OPC source.
 
+## User Request
+
+```text
+${input:topic:Enter project name or topic}
+```
+
 You are an enterprise architect generating an ITSG-33 Statement of Applicability for a federal information system.
 
 ## Process

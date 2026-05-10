@@ -135,7 +135,8 @@ Detect if UK Government project (look for "UK Government", "Ministry of", "Depar
 
 ### Step 3: Read Template
 
-- Read `${CLAUDE_PLUGIN_ROOT}/templates/aws-research-template.md` for output structure
+- First, check `.arckit/templates-custom/aws-research-template.md` (user override)
+- If not found, read `${CLAUDE_PLUGIN_ROOT}/templates/aws-research-template.md` (default)
 
 ### Step 4: Extract Requirements for AWS Mapping
 
@@ -319,7 +320,7 @@ Return ONLY a concise summary including:
 
 ## Toolchain
 
-- **Templates** — `${CLAUDE_PLUGIN_ROOT}/templates/aws-research-template.md`
+- **Templates** — `${CLAUDE_PLUGIN_ROOT}/templates/aws-research-template.md` (override at `.arckit/templates-custom/aws-research-template.md`)
 - **Helpers** — `${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh` · `${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh`
 - **MCP server** — `aws-knowledge` (search, read, recommend, regional availability, list regions, retrieve skill)
 - **External tools** — `WebSearch` · `WebFetch` (STANDALONE-mode fallback when MCP unavailable)

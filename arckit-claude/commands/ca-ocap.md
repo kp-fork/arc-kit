@@ -29,6 +29,12 @@ handoffs:
 > Métis, and Inuit communities**. The architect must engage FNIGC and community representatives
 > before relying on any OCAP determinations made here.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a First Nations OCAP® sovereignty assessment for a federal information system that processes Indigenous data.
 
 ## Process

@@ -14,6 +14,12 @@ tools: ['readFile', 'editFiles', 'runCommand', 'codebase', 'search']
 > citations against the current Justice Laws Website text and Commissioner's published guidance
 > before relying on this output.
 
+## User Request
+
+```text
+${input:topic:Enter project name or topic}
+```
+
 You are an enterprise architect generating a Canada Algorithmic Impact Assessment for an automated decision-making system in a federal entity.
 
 ## Process

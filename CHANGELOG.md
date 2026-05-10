@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.20.0] - 2026-05-10
+
+### Added
+
+- **Codex plugin bundle with lifecycle hooks.** `arckit-codex/` now ships a Codex plugin manifest, MCP config, hook wiring, and a native hook runner for context injection, prompt secret checks, file guardrails, MCP approval policy, artifact graph context, provenance stamping, manifest maintenance, and Stop-session memory.
+- **Codex marketplace metadata and CI.** Adds `.agents/plugins/marketplace.json` pointing at the standalone `tractorjuice/arckit-codex` repo, plus a focused Codex plugin workflow that checks hook syntax, CLI syntax, and Codex extension tests.
+- **Codex schemas and validators.** The Codex bundle now includes deterministic handoff schemas, scoring rubrics, `validate-handoff.mjs`, and `owm-to-mermaid.mjs` so research and Wardley workflows work in standalone extension installs.
+
+### Changed
+
+- **Extension generation now preserves Codex-native behavior.** The converter generates Codex plugin metadata, Codex MCP config, hook-enabled `config.toml`, hyphen-safe skill names, rewritten template override paths, and refreshed standalone extension assets.
+- **Release tooling now fails on extension push errors.** `scripts/push-extensions.sh` now treats commit or push failures as real failures instead of reporting a false success.
+
+### Fixed
+
+- **Codex CLI project scaffolding now installs hooks and validators.** `arckit init --ai codex` copies `.codex/hooks/`, `.arckit/schemas/`, and `.arckit/scripts/validate-handoff.mjs`, and keeps `.codex/agents/**` and `.codex/hooks/**` unignored.
+
 ## [4.19.2] - 2026-05-07
 
 ### Changed

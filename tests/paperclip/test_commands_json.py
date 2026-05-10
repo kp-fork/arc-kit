@@ -2,11 +2,25 @@
 
 import json
 import os
+from pathlib import Path
 import pytest
 
 COMMANDS_JSON_PATH = os.path.join(
     os.path.dirname(__file__), "..", "..", "arckit-paperclip", "src", "data", "commands.json"
 )
+REPO_ROOT = Path(__file__).resolve().parents[2]
+CLAUDE_COMMANDS_DIR = REPO_ROOT / "arckit-claude" / "commands"
+CLAUDE_ONLY_COMMANDS = {"build.md"}
+
+
+def expected_command_count():
+    return len(
+        [
+            path
+            for path in CLAUDE_COMMANDS_DIR.glob("*.md")
+            if path.name not in CLAUDE_ONLY_COMMANDS
+        ]
+    )
 
 
 @pytest.fixture
@@ -24,7 +38,8 @@ def test_commands_is_list(commands):
 
 
 def test_commands_count(commands):
-    assert len(commands) == 87, f"Expected 87 commands, got {len(commands)}"
+    expected = expected_command_count()
+    assert len(commands) == expected, f"Expected {expected} commands, got {len(commands)}"
 
 
 def test_every_entry_has_required_fields(commands):

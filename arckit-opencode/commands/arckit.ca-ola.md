@@ -7,6 +7,12 @@ description: "[COMMUNITY] Generate an Official Languages Act review — Parts IV
 > (ATIP coordinator, ITSEC officer, OCHRO language lead, CIO branch) before reliance. Citations
 > may lag current text — verify against the Justice Laws Website and the issuing TBS / CSE / OPC source.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating an Official Languages Act review for a federal digital service.
 
 ## Process

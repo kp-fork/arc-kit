@@ -12,6 +12,12 @@ description: "[COMMUNITY] Generate a Canada Algorithmic Impact Assessment per th
 > citations against the current Justice Laws Website text and Commissioner's published guidance
 > before relying on this output.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a Canada Algorithmic Impact Assessment for an automated decision-making system in a federal entity.
 
 ## Process

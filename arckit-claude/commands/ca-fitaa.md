@@ -24,6 +24,12 @@ handoffs:
 > citations against the current Justice Laws Website text and Commissioner's published guidance
 > before relying on this output.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a Canada FITAA Compliance Assessment for a federal entity.
 
 ## Process
