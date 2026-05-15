@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.21.0] - 2026-05-15
+
+### Added
+
+- **PostCompact hook re-injects project context** (#475). Companion to `keep-coding-instructions: true` — static command bodies were already preserved across `/compact`, but dynamic filesystem-derived state (active projects, ARC-* artefacts, external docs, global policies) was lost. The new `postcompact-rehydrate.mjs` hook closes that gap by reusing `buildProjectContext` from the existing context-injection builder.
+- **Effort tier captured + surfaced** (#471). `session-learner.mjs` and `telemetry.mjs` now read the session's effort tier from hookInput `effort.level` or `$CLAUDE_EFFORT` (Claude Code v2.1.133+); recorded per-event in the telemetry JSONL, per-session in `sessions.md` and `docs/telemetry.json`. The `/arckit:pages` dashboard's Session Telemetry panel gains an "Effort mix" row and a per-session effort chip.
+- **Autoresearch explicit stop conditions** (#474). The optimisation loop now self-terminates on score-target hit (`best >= 9.5`), iteration budget (`iter >= 30`), or double-plateau detection. No more loop-forever — token budget bounded by default; thresholds tunable inline.
+- **Cross-reference linter** (#464). `scripts/check_references.py` validates `${CLAUDE_PLUGIN_ROOT}` paths, `handoffs[].command` slugs, and `${user_config.KEY}` keys against disk. Wired into `.github/workflows/lint-markdown.yml`.
+- **MCP catalogue** (#465). Documentation listing the 5 bundled MCP servers, what they're for, and how each plugs into the relevant ArcKit command. Closes #442 item 15.
+
+### Changed
+
+- **Hook config migrated to `args: string[]` exec form** (#467). All 16 entries in `arckit-claude/hooks/hooks.json` use the v2.1.139 exec form (`command: "node"` + `args: ["..."]`) instead of the legacy shell-string. The harness now execs `node <path>` directly, eliminating shell-quoting and metacharacter pitfalls in `${CLAUDE_PLUGIN_ROOT}`-substituted paths.
+- **PostToolUse hooks set `continueOnBlock: true`** (#470). The 4 observational PostToolUse entries (`update-manifest`, `provenance-stamp` ×2, `telemetry`) can no longer derail the user's turn if they ever emit `decision: block`. Block-as-gate semantics retained for the genuine PreToolUse / UserPromptSubmit guards.
+- **Minimum Claude Code version bumped to v2.1.139** (from v2.1.129). Required by the `args` exec form and `continueOnBlock`. Also picks up v2.1.133 subagent skill discovery fix (relevant to ArcKit's 13 agents) and v2.1.136 SessionStart env staleness fix.
+- **Docs: `/fast` Opus 4.7 default + `MCP_TOOL_TIMEOUT` env var** (#473). CLAUDE.md captures the v2.1.142 `/fast` default change. New "Optional: MCP per-request timeout" section in `docs/guides/mcp-servers.md` recommends `MCP_TOOL_TIMEOUT=300000` for corporate networks with TLS-inspecting proxies; one-line cross-references added to each of the 3 cloud-research guides.
+- **AGENTS.md repository guidelines** (#463). New top-level `AGENTS.md` documenting the agent-development conventions used in this repo.
+
+### Site
+
+- **Launch ArcKit FDE** (#460), nav/footer link to FDE (#458), GOV.UK Design System credit removed from footers (#459), opening-paragraph polish + "agentic AI" positioning (#461, #462).
+
 ## [4.20.3] - 2026-05-11
 
 ### Fixed

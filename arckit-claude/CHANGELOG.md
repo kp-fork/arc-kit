@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.21.0] - 2026-05-15
+
 ### Added
 
 - **`postcompact-rehydrate.mjs` PostCompact hook re-injects project context after compaction** (#472). Fires after `/compact` or auto-compaction; emits the same project inventory + artifact listings + external documents + global policies that the `UserPromptSubmit` hook produces, so the summary doesn't drop filesystem-derived state until the user types the next `/arckit:` prompt. Reuses `buildProjectContext` from `project-context-builder.mjs` — no new marker-file convention; the filesystem is the source of truth. Companion to `keep-coding-instructions: true` (v2.1.94), which preserves static command bodies but not dynamic state.
