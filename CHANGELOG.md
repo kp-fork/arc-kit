@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.0] - 2026-XX-XX
+
+### BREAKING
+
+- **Community overlays moved to separate plugins**. The monolithic `arckit` plugin shipped 117 commands (71 core + 46 community). v5.0.0 splits community commands into six per-jurisdiction marketplace plugins: `arckit-uae` (12 commands + 2 recipes), `arckit-fr` (12), `arckit-ca` (12 + 1 recipe), `arckit-eu` (7), `arckit-at` (3), and `arckit-au` (8 + 1 recipe — new in v5.0.0). Users now install only the jurisdictions they need. Total surface: 125 commands across 7 plugins.
+  - **Migration:** after upgrading, install the community plugins you previously used. A one-shot SessionStart banner reads `.arckit/manifest.json` and prints the exact `claude plugin install ...` command for your project. Acknowledge with `touch .arckit/v5-migration-acked`.
+  - **Token savings:** UK-only users save ~5K tokens per SessionStart system reminder (estimate — to be replaced with measured figures in Task 16).
+  - **No functional change** for users who install all 6 plugins — the full 117-command surface is intact, just spread across plugins.
+
+### Added
+
+- `scripts/check_recipes.py` — CI gate validating every recipe's structure and dep references.
+- `scripts/check_doctype_collisions.py` — CI gate asserting every doc-type code in `arckit-claude/config/doc-types.mjs` is unique.
+- `scripts/tag-plugins.sh` — creates native `<plugin>--vX.Y.Z` tags per release (idempotent).
+- `arckit-claude/hooks/v5-migration-banner.mjs` — one-shot SessionStart hook suggesting per-jurisdiction installs based on prior project artefacts.
+- 6 new plugin directories: `arckit-uae/`, `arckit-fr/`, `arckit-ca/`, `arckit-eu/`, `arckit-at/`, `arckit-au/`, each with their own `plugin.json`, `README.md`, `VERSION`, `commands/`, `templates/`, and (where applicable) `recipes/`.
+- **`arckit-au`** Australian Federal / DISP-supplier overlay — 8 commands (`au-e8-posture`, `au-pia`, `au-dss`, `au-ism-controls`, `au-ndb-playbook`, `au-pspf`, `au-ai-assurance`, `au-disp-attestation`), 8 templates, and the `au-federal` recipe (35 targets, 9 waves). 8 new doc-type codes registered in `arckit-claude/config/doc-types.mjs` (`AUE8`, `AUISM`, `AUPIA`, `AUNDB`, `AUDSS`, `AUPSPF`, `AUAIA`, `AUDISP`). Adds `AU` regime; also adds `CA` retroactively (CA shipped doc-types in v4.15.0 but was missing from `REGIMES`). Domain co-maintainer: @royster70. Supersedes #441.
+
+### Changed
+
+- `arckit-build` skill: new three-tier recipe lookup precedence — project override → core plugin → sibling community plugins via glob.
+- `scripts/converter.py` walks all 6 plugin source dirs and merges into one extension output per non-Claude format. Non-Claude extensions stay monolithic per the v5 design.
+- `scripts/bump-version.sh` updates 6 plugin manifests + `marketplace.json` (all `.plugins[]` entries) instead of just one.
+- `docs/RELEASING.md` updated with multi-plugin release flow.
+- `CONTRIBUTING.md` adds a two-part PR rule for new doc-types (command in community plugin, doc-type registration in core).
+
+### Note on doc-types
+
+All doc-type codes remain in `arckit-claude/config/doc-types.mjs` — community plugins ship commands and recipes only. This keeps `validate-arc-filename.mjs` single-sourced.
+
+### Note on plugin dependencies (Claude Code v2.1.110+)
+
+All 6 community plugins (`arckit-uae`, `arckit-fr`, `arckit-ca`, `arckit-eu`, `arckit-at`, `arckit-au`) declare an exact (`=`) dependency on the `arckit` core plugin. Installing any community plugin auto-installs core; uninstalling with `--prune` cleans it up. The exact pin keeps the 6 plugins shipping as a coherent set — `scripts/bump-version.sh` updates `.version` and `.dependencies[arckit].version` in lockstep on every release.
+
 ## [4.22.0] - 2026-05-17
 
 ### Added
