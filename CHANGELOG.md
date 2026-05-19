@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.1] - 2026-05-19
+
+### Changed
+
+- **Minimum Claude Code version bumped to v2.1.144** (from v2.1.139). Adopts items 1, 3, 5, 8 from #495 — see `arckit-claude/CHANGELOG.md` for the full plugin entry.
+
+### Fixed
+
+- `CLAUDE.md` and `README.md` agent-count corrected from "13 agents" to **16 agents** (10 single-tier + 6 reader/writer subagents). Discovered during the #495 item 10 subagent-slug audit.
+
 ## [5.0.0] - 2026-05-18
 
 ### BREAKING

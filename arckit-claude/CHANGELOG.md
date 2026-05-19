@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.1] - 2026-05-19
+
+### Changed
+
+- **Minimum Claude Code version bumped to v2.1.144** (from v2.1.139). The new floor pulls in three concrete improvements relevant to ArcKit:
+  - **v2.1.143 plugin dependency enforcement** — `claude plugin disable arckit` now surfaces a copy-pasteable disable-chain hint when a community overlay (`arckit-uae`, `arckit-fr`, `arckit-ca`, `arckit-eu`, `arckit-at`, `arckit-au`) depends on it, instead of silently breaking the overlay.
+  - **v2.1.144 plugin monitor / session-title fix** — direct fix for a bug where ArcKit's `stale-artifact-scan` background monitor's description leaked into new-session titles instead of the user's first prompt.
+  - **v2.1.144 headless Skill-tool permission fix** — `/arckit:*` commands run via `claude -p` / CI were failing with permission errors on v2.1.141–v2.1.143 (regression in v2.1.141).
+- `arckit-claude/hooks/version-check.mjs` rationale list extended with the three new entries above.
+
+### Added
+
+- `skills/arckit-build/SKILL.md` — new "Pairing with `/goal`" section documenting how to compose Claude Code's `/goal` command (v2.1.139+) with `/arckit:build` recipes for build-until-APPROVED, refresh-stale-slice, and drive-to-GA loops. Includes the Claude-only caveat and v2.1.143 Stop-hook block-cap interaction note.
+
+### Fixed
+
+- `CLAUDE.md` Agent System section — corrected agent count from "13" to **16** (10 single-tier + 6 reader/writer subagents). Adds a "Reader/writer subagents" paragraph explaining the three-tier orchestrator pattern (`datascout`, `grants`, `gov-reuse` each ship a `-reader` and `-writer` internal subagent per `READER-PATTERN.md`).
+- `README.md` "Why v2.1.144?" callout — agent count corrected (13 → 16); rewritten from the prior "Why v2.1.139?" version with v2.1.143/144 context prepended.
+
 ## [5.0.0] - 2026-05-18
 
 ### BREAKING
