@@ -94,3 +94,19 @@ tests/*/output/
 tools/wardley-lsp/
 tests/mermaid-wardley/
 .claude/scheduled_tasks.lock
+
+# Ignyte scraper - captured session token (never commit)
+docs/auth.txt
+
+# Investor pitch decks - confidential fundraising material.
+# arc-kit is a public repo; the decks, scraped investor data (with PII),
+# scraper config/tokens, and generator scripts must never be committed.
+docs/pitch-decks/
+docs/2026-05-20-difc-innovation-licence-setup-guide.pdf
+
+# LinkedIn data export - contains personal PII (connections, messages, phone)
+docs/*LinkedInDataExport*
+
+# arckit-consulting/ is a clone of the separate tractorjuice/arckit-fde repo.
+# Per project memory, FDE-site changes belong in that repo, not here.
+arckit-consulting/
