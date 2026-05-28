@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.5.0] — 2026-05-28
+
+### Brand reposition
+
+Significant identity refresh. No functional changes to commands, agents, hooks, or recipes — purely brand surfaces, assets, and positioning copy.
+
+### Changed
+
+- **Tagline**: "Enterprise Architecture Governance & Vendor Procurement Toolkit" → **"The Enterprise Architecture Governance Harness"**. Drops the loaded "Toolkit" category and elevates "Harness" — the structural metaphor that better matches how ArcKit actually behaves (it harnesses an AI assistant against a template-driven governance frame). Updated across every brand surface: root `README.md`, plugin `plugin.json`, marketplace `marketplace.json`, Gemini extension JSON, Codex / Copilot / OpenCode / Paperclip READMEs, `CLAUDE.md`, `docs/llms.txt`, `docs/index.html` (meta description + OG + Twitter + JSON-LD + footer + hero), all 10 docs `*.html` pages, all 6 start guides, the published article on government code discovery, the FDE pitch deck, the business plan, the CLI `__init__.py` docstring + `TAGLINE` constant + Typer help text, and the SDG repo scaffold script.
+- **Category positioning**: "Architecture · Vendor Procurement · Compliance" → **"Strategy · Architecture · Delivery · Assurance"**. Reflects the actual 71-command surface, where procurement is one cluster of ~6 commands among seven; the new four-bucket framing makes Strategy (principles/SOBC/risk/Wardley/roadmap/story/framework), Architecture (ADRs/diagrams/HLD-DLD/data-mesh-contract/platform-design/data-model/backlog/servicenow), Delivery (devops/mlops/finops/operationalize/pages/presentation), and Assurance (analyze/conformance/traceability/health/navigator/maturity-model + all compliance commands) each load-bear an equivalent share of the surface. Procurement (sow, dos, evaluate, score, gcloud-*) is preserved as functional content — the SOW command, plan-template Gantt phases, procurement guide, use-case index entry — but no longer leads positioning.
+
+### Added
+
+- **New logo family — Bracket-B2**. Replaces the previous arc-with-three-nodes "arc-kit" mark. Built from three semantic elements that depict an AI harness: angle brackets `⟨ ⟩` (harness frame / prompt structure), inner caret `^` (prompt indicator), linchpin cursor (teal terminal anchors flanking a navy centre pin — the AI output baseline). Selected from six concept directions explored under `docs/assets/concepts/` (Bracket A/B/C, Linchpin A/B, Hybrid) and three Bracket-B grafts (B1 anchor-nodes / B2 linchpin-cursor / B3 linchpin-fan). Full asset family in production paths: `ArcKit_Mark_Light/Dark.svg`, `ArcKit_Logo_Horizontal_Light/Dark.svg`, `ArcKit_Logo_Stacked_Light/Dark.svg`, `arckit-banner-light/dark.svg`, `og-card.svg`, `favicon.svg` (large, navy 96-radius tile), `favicon-small.svg` (16/32 stripped variant).
+- **Dark banner** — `arckit-banner-dark.svg` was missing from the library entirely. Added.
+- **OG card** — `docs/assets/og-card.svg` 1200×630 hero with the new mark, wordmark, tagline, and four-bucket subtitle. Replaces `docs/og-image.png` content so the existing `https://arckit.org/og-image.png` URL serves the new design without breaking inbound shares.
+- **Favicon set** — `favicon.svg`, `favicon-512.png`, `favicon-192.png`, `favicon-32.png`, `favicon-16.png`, plus a simplified `favicon-small.svg` for the 16/32 sizes. Wired into all 10 docs `*.html` pages via `<link rel="icon">` block placed after each page's canonical link.
+- **Render script** — `scripts/render-brand-pngs.py` (uses `cairosvg`) regenerates all 22 PNG exports from the SVG sources. Run after any SVG edit to keep raster exports in sync.
+- **Concept directory retained** — `docs/assets/concepts/` (six initial concept thumbnails + three B-grafts + `v2/` full Bracket-B2 family pre-promotion) kept in-repo as design source-of-truth for future iteration.
+- **Brand-motif documentation** — `docs/assets/README.md` "Brand motif" section rewritten to describe the Bracket-B2 design and its colour-role assignments (`#0B1F33` navy for structure, `#1ED3C6` teal for the AI/active layer).
+
+### Changed (external)
+
+- GitHub repo description updated via `gh repo edit` to match the new tagline.
+- **Not done by this release**: GitHub social-preview image. The repo's social-preview image is not exposed via `gh` CLI or REST API. Upload `docs/assets/og-card.png` manually at GitHub → Settings → General → Social preview.
+
 ## [5.4.0] — 2026-05-27
 
 ### Fixed

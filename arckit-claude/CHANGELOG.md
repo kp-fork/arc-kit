@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.5.0] - 2026-05-28
+
+### Brand reposition
+
+Plugin slice of the v5.5.0 ArcKit rebrand. No functional changes to commands, agents, hooks, recipes, or skills.
+
+### Changed
+
+- **`arckit-claude/.claude-plugin/plugin.json` description**: now reads "The Enterprise Architecture Governance Harness - 70 slash commands across strategy, architecture, delivery, and assurance".
+- **`arckit-claude/README.md`** headline: updated to new tagline + four-bucket category line.
+- **Start guide** (`arckit-claude/docs/guides/start.md`): updated banner-output mockup to the new tagline.
+
+See the root [`CHANGELOG.md`](../CHANGELOG.md#550--2026-05-28) for the full rebrand scope (logo family, OG card, favicons, category positioning, and the brand sweep across the entire repository).
+
 ## [5.4.0] - 2026-05-27
 
 ### Fixed
