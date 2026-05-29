@@ -5,6 +5,16 @@ All notable changes to the ArcKit Claude Code plugin will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.7.0] - 2026-05-29
+
+### Fixed
+
+- **US regime now registered** in `config/doc-types.mjs` `REGIMES` + `REGIME_LABELS` (#545). `regime: 'US'` was declared on 10 doc-types but the regime code was absent from both exports, so `hooks/graph-inject.mjs` (which iterates `REGIMES`) silently omitted US compliance artefacts (FedRAMP/FISMA/NIST 800-53/CISA Zero Trust/etc.) from the governance-context presence listing and readiness scorecard. Added `'US'` + `US: 'USA Federal'`.
+
+### Added
+
+- **Regime-registration guard test** (`scripts/tests/test-regime-registration.mjs`, CI-enforced): every declared doc-type `regime:` must be registered in `REGIMES` and `REGIME_LABELS`. Closes the gap that let the US (and earlier CA) regime omissions ship silently.
+
 ## [5.6.0] - 2026-05-29
 
 ### Changed

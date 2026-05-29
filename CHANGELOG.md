@@ -5,6 +5,18 @@ All notable changes to ArcKit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.7.0] — 2026-05-29
+
+### Fixed
+
+- **US regime registration** (#545, #546). `regime: 'US'` was declared on 10 doc-types (FedRAMP/FISMA/NIST 800-53/CISA Zero Trust/ICAM/AI RMF/PIA/SBOM) but `'US'` was missing from the exported `REGIMES` array and `REGIME_LABELS` in `arckit-claude/config/doc-types.mjs`. The sole consumer, `hooks/graph-inject.mjs`, iterates `REGIMES` directly, so US compliance artefacts were silently dropped from the "Compliance Artifact Presence" listing and never scored in the readiness scorecard despite validating on disk. Added `'US'` + `US: 'USA Federal'`. Same failure class as the CA omission fixed in #441.
+- **`arckit-uk-finance` restored to extension conversion** (#546). `scripts/converter.py` `PLUGIN_SOURCES` omitted `arckit-uk-finance`, so its four `uk-fs-*` commands were absent from all five non-Claude extensions (Codex/OpenCode/Gemini/Copilot/Paperclip) from v5.3.0 onward. Added it and regenerated every extension. Also mirrored the eight `uk-fs` templates into `.arckit/templates/` (CLI package data — `arckit init` users had missed them) and removed a stray tracked `arckit-uk-finance/templates/.gitkeep` the converter was copying into extension dirs as noise.
+- Refreshed stale overlay-enumeration lists in the test suite (`tests/plugin/test_template_consistency.py`, `tests/paperclip/test_commands_json.py`, `tests/codex/test_codex_extension.py`) to include the `us` / `uk-finance` / `uk-nhs` overlays.
+
+### Added
+
+- **Regime-registration guard test** (`scripts/tests/test-regime-registration.mjs`, wired into CI `lint-markdown.yml`). Asserts every declared doc-type `regime:` is present in both `REGIMES` and `REGIME_LABELS` — the invariant whose absence let the US gap (and the earlier CA gap) ship silently.
+
 ## [5.6.0] — 2026-05-29
 
 ### Changed
