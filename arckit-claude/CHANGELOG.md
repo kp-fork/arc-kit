@@ -5,7 +5,7 @@ All notable changes to the ArcKit Claude Code plugin will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [5.6.0] - 2026-05-29
 
 ### Changed
 
@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **`defaultEnabled: false` on all 9 community overlays** (`arckit-uae`, `arckit-fr`, `arckit-ca`, `arckit-eu`, `arckit-at`, `arckit-au`, `arckit-us`, `arckit-uk-finance`, `arckit-uk-nhs`), adopting the Claude Code v2.1.154 manifest field. Marketplace install surfaces the overlays without auto-enabling all nine; core `arckit` stays default-enabled. Addresses item 42 of #522.
+
+### Fixed
+
+- **UK accessibility target corrected from WCAG 2.1 AA to WCAG 2.2 AA** across `commands/service-assessment.md` (5 references), `commands/backlog.md`, and the `requirements`, `sow`, `research-findings`, `platform-design`, and `backlog` templates. UK public sector bodies are monitored against WCAG 2.2 AA — the *Public Sector Bodies Accessibility (Amendment) (EU Exit) Regulations 2022* (SI 2022/1097) replaced the fixed WCAG version with a rolling reference to the latest published version (currently 2.2). Jurisdictional overlays intentionally unchanged (FR `fr-dinum` and CA `ca-gc-digital-standards` correctly remain on 2.1; AU `au-dss` already on 2.2). (#542)
 
 See the root [`CHANGELOG.md`](../CHANGELOG.md) for the cross-repo scope.
 
