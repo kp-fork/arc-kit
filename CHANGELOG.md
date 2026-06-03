@@ -5,6 +5,20 @@ All notable changes to ArcKit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.9.1] — 2026-06-03
+
+### Fixed
+
+- **All MCP-backed subagents can now reach their plugin MCP servers** (#564, #565). `/arckit:tenders` and `/arckit:competitors` (#564), and then every other MCP-backed agent (#565), were falling through to empty/degraded paths because their reader/research subagents could not call the bundled MCP servers. Two root causes, both required, confirmed against the Claude Code docs:
+  - **Tool-name prefix.** Plugin-bundled MCP tools surface at runtime as `mcp__plugin_arckit_<server>__<tool>`, but the agents' `tools:` allowlists used the bare `mcp__<server>__` form, which matches nothing in a subagent allowlist. Prefixed the tool names in 8 agents: `arckit-tenders-reader` (#564) plus `arckit-aws-research`, `arckit-azure-research`, `arckit-gcp-research`, `arckit-gov-code-search`, `arckit-gov-landscape`, `arckit-gov-reuse-reader`, `arckit-datascout-reader` (#565).
+  - **Deferred servers don't reach subagents.** A deferred (non-`alwaysLoad`) plugin MCP server is not injected into subagent context — only the main agent can load it on demand — so a subagent needs `alwaysLoad: true` to see it. Added `alwaysLoad` to `uk-tenders` (#564), `govreposcrape`, `google-developer-knowledge` and `datacommons-mcp` (#565), joining `aws-knowledge` / `microsoft-learn` which already had it. For the two keyed servers, a keyless user's session attempts the connection at startup; per the docs an auth failure marks the server failed and the session continues, bounded by the 5s connect timeout.
+- **Codex extension `sync-guides.mjs` drift** (#562). Re-synced the hand-maintained `sync-guides.mjs` between `arckit-claude` and `arckit-codex` — restored the NHS clinical-safety block and the `{{REPO_OWNER}}` substitution that had drifted out of the Codex copy.
+
+### Changed
+
+- **Per-page canonical / Open Graph metadata for arckit.org viewers** (#561), plus the `pages-template.html` head, so generated documentation sites and the article viewers emit correct canonical and OG tags.
+- **`/arckit:start` workflow-trigger note** corrected for the Claude Code v2.1.160 `workflow` → `ultracode` keyword rename (#522 item 59, #560).
+
 ## [5.9.0] — 2026-06-02
 
 ### Added

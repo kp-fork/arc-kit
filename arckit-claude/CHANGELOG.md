@@ -5,6 +5,18 @@ All notable changes to the ArcKit Claude Code plugin will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.9.1] — 2026-06-03
+
+### Fixed
+
+- **All MCP-backed subagents can now reach their plugin MCP servers** (#564, #565). `/arckit:tenders` + `/arckit:competitors` (#564) and every other MCP-backed agent (#565) were degrading because their subagents could not call the bundled MCP servers. Two root causes, both required, confirmed against the Claude Code docs:
+  - **Tool-name prefix.** Plugin-bundled MCP tools surface at runtime as `mcp__plugin_arckit_<server>__<tool>`; the agents' `tools:` allowlists used the bare `mcp__<server>__` form, which matches nothing. Prefixed the tool names in 8 agents: `arckit-tenders-reader` (#564) plus `arckit-aws-research`, `arckit-azure-research`, `arckit-gcp-research`, `arckit-gov-code-search`, `arckit-gov-landscape`, `arckit-gov-reuse-reader`, `arckit-datascout-reader` (#565).
+  - **Deferred servers don't reach subagents.** A deferred (non-`alwaysLoad`) plugin MCP server is not injected into subagent context, so a subagent needs `alwaysLoad: true`. Added `alwaysLoad` to `uk-tenders` (#564), `govreposcrape`, `google-developer-knowledge` and `datacommons-mcp` (#565), joining `aws-knowledge` / `microsoft-learn`. For the keyed servers, a keyless session attempts the connection at startup; per the docs an auth failure marks the server failed and the session continues, bounded by the 5s connect timeout. `tools:` and `alwaysLoad` are Claude-only, so the converter produces no extension changes.
+
+### Changed
+
+- Documentation: per-page canonical / Open Graph metadata for arckit.org viewers and the `pages-template.html` head (#561); corrected the `/arckit:start` workflow-trigger note for the Claude Code v2.1.160 `workflow` → `ultracode` keyword rename (#560).
+
 ## [5.9.0] — 2026-06-02
 
 ### Added
