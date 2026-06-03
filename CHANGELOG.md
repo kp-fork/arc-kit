@@ -5,6 +5,16 @@ All notable changes to ArcKit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.9.2] — 2026-06-03
+
+### Fixed
+
+- **`CMPT` and `TNDR` now sequence correctly in `generate-document-id.sh`** (#566). The bundled helper hardcoded `MULTI_INSTANCE_TYPES` without `CMPT` or `TNDR` (both added in 5.9.0), so `/arckit:competitors` and `/arckit:tenders` received document IDs with **no sequence number** (e.g. `ARC-001-CMPT-v1.0`) and collided on every run. The plugin copy (`arckit-claude/scripts/bash/`) — the one the plugin cache actually executes — had drifted from the already-fixed CLI copy (`scripts/bash/`), despite the script's own "keep in sync with `doc-types.mjs`" comment. Added `TNDR CMPT` after `DSCT` to match `config/doc-types.mjs MULTI_INSTANCE_TYPES` and regenerated the codex / copilot / opencode / gemini copies via the converter.
+
+### Changed
+
+- **Writer-subagent writes pre-authorised in the dev repo** (#566). The five writer subagents (`competitors` / `tenders` / `gov-reuse` / `datascout` / `grants`) hold `Write`/`Edit` but run non-interactively, so a gated `Write` is auto-denied — a subagent cannot surface an approval prompt. Added scoped `Write(//workspaces/arc-kit/projects/**)` + `Edit(...)` rules to `.claude/settings.json`. Least-privilege: the writers have no web/MCP tools and the orchestrator schema-validates payloads before they run, so this only authorises the boundary the reader/writer split already enforces.
+
 ## [5.9.1] — 2026-06-03
 
 ### Fixed

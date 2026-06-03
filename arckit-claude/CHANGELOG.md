@@ -5,6 +5,12 @@ All notable changes to the ArcKit Claude Code plugin will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.9.2] — 2026-06-03
+
+### Fixed
+
+- **`CMPT` and `TNDR` now sequence correctly in `generate-document-id.sh`** (#566). The helper hardcoded `MULTI_INSTANCE_TYPES` without `CMPT` or `TNDR` (both added in 5.9.0), so `/arckit:competitors` and `/arckit:tenders` got document IDs with **no sequence number** (e.g. `ARC-001-CMPT-v1.0`) and collided on every run. `arckit-claude/scripts/bash/` — the copy the plugin cache executes — had drifted from the already-fixed CLI copy, despite the script's "keep in sync with `doc-types.mjs`" comment. Added `TNDR CMPT` after `DSCT` to match `config/doc-types.mjs MULTI_INSTANCE_TYPES`. The converter regenerates the codex / copilot / opencode / gemini copies.
+
 ## [5.9.1] — 2026-06-03
 
 ### Fixed
