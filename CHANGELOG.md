@@ -5,6 +5,19 @@ All notable changes to ArcKit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.11.0] — 2026-06-05
+
+### Added
+
+- **End-of-turn traceability nudge** (#578). The `Stop` hook (`session-learner.mjs`) now emits one gentle, non-blocking next-step suggestion via `hookSpecificOutput.additionalContext` when a session's commits leave a curated traceability-chain gap — `REQ`→no `TRAC` (`/arckit:traceability`), `STKE`→no `REQ` (`/arckit:requirements`), `REQ`→no `DATA` (`/arckit:data-model`), `ADR`→no `DIAG` (`/arckit:diagram`). It reacts to the just-finished turn, distinct from the SessionStart stale-artifact monitor and `/arckit:navigator`/`health`. Version-gated to Claude Code v2.1.163+ (older clients treat a `Stop` `additionalContext` as a hook error): `version-check.mjs` persists the detected client version to `.arckit/memory/.cc-version` at SessionStart and the nudge stays silent below the gate, on `StopFailure`, or when `ARCKIT_NO_NUDGE` is set. The decision logic is the pure, unit-tested `selectNudge` in `session-nudge.mjs`.
+- **Per-agent telemetry attribution** (#579). `telemetry.mjs` stamps `agent_id`/`agent_type` (Claude Code v2.1.145+) onto latency and MCP records when a tool runs inside a subagent, so the session summary and `docs/telemetry.json` now break tool activity down **by agent** (e.g. `arckit-research` vs the main thread). New pure `telemetry-rollup.mjs` (`summariseTelemetry`/`rollupTelemetry`) adds a `byAgent` breakdown and the `/arckit:pages` "Recent Sessions" panel surfaces the busiest subagent. `parent_agent_id` is not exposed to hooks, so activity is attributed per agent rather than reconstructing the dispatch tree.
+- **`minimumVersion` floor guidance** (#575). The below-floor `version-check.mjs` warning now recommends adding `"minimumVersion"` to `.claude/settings.json` so background auto-updates / `claude update` cannot drift below ArcKit's Claude Code floor — distinct from the org-only managed `requiredMinimumVersion`. Dogfooded in this repo and the test-repo scaffold.
+
+### Changed
+
+- **Documentation — Claude Code v2.1.161–v2.1.163 adoption** (#576). New "Fleet & Version Governance (managed settings)" section in the enterprise-scale guide (`requiredMinimumVersion`/`requiredMaximumVersion`, `pluginSuggestionMarketplaces`, `OTEL_RESOURCE_ATTRIBUTES`); the MCP guide notes the sub-1000 ms per-server `timeout` floor and that `claude mcp` now redacts secrets; the autoresearch guide documents `--fallback-model`; the security-hooks guide documents scoping research-agent `WebFetch` to approved domains; the custom-commands guide documents the `\$` literal-dollar escape; `/plugin list --enabled` noted in the install guide.
+- **Documentation — effort-tier accuracy** (#577). Corrected the `effort:` frontmatter description: `max` is supported on Opus 4.6/4.7/4.8 and `xhigh` is the tier Opus 4.7/4.8 add. Verified ArcKit's `effort: max` commands run as `max` on Opus 4.8 (no code change needed).
+
 ## [5.10.0] — 2026-06-04
 
 ### Added
