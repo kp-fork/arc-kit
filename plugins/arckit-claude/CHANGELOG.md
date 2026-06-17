@@ -5,6 +5,17 @@ All notable changes to the ArcKit Claude Code plugin will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.14.0] — 2026-06-17
+
+### Added
+
+- **Mistral Vibe CLI extension support (#598).** The converter now emits Vibe
+  skills, Vibe agent TOML, runtime assets, references, schemas, and MCP
+  configuration from the canonical ArcKit plugin sources. The generated Vibe
+  payload is published to the standalone
+  [`tractorjuice/arckit-vibe`](https://github.com/tractorjuice/arckit-vibe)
+  repository instead of being tracked directly in this repo.
+
 ## [5.13.2] — 2026-06-17
 
 ### Fixed

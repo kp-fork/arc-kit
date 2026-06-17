@@ -1218,7 +1218,7 @@ def generate_vibe_config_toml(output_path, version, agent_files):
         "management, and compliance workflows in Mistral Vibe.",
         '"""',
         'author = "TractorJuice"',
-        'repository = "https://github.com/tractorjuice/arc-kit"',
+        'repository = "https://github.com/tractorjuice/arckit-vibe"',
         'license = "MIT"',
         'homepage = "https://tractorjuice.github.io/arc-kit/"',
         "",
