@@ -70,6 +70,27 @@ See the [full articles index](articles.html) for all ArcKit release notes, analy
 - [Data Mesh Contract](guides/data-mesh-contract.md) - `/arckit:data-mesh-contract`
 - [C4 Layout Science](guides/c4-layout-science.md) - Research-backed diagram layout
 
+### TOGAF ADM Overlay
+
+- [ADM Preliminary](guides/adm-preliminary.md) - `/arckit:adm-preliminary`
+- [Business Capability Map](guides/business-capability-map.md) - `/arckit:business-capability-map`
+- [Application Inventory](guides/application-inventory.md) - `/arckit:application-inventory`
+- [Application Rationalization](guides/application-rationalization.md) - `/arckit:application-rationalization`
+- [TOGAF Gap Analysis](guides/gap-analysis.md) - `/arckit:gap-analysis`
+- [Transition Architecture](guides/transition-architecture.md) - `/arckit:transition-architecture`
+- [Architecture Board](guides/architecture-board.md) - `/arckit:architecture-board`
+- [Architecture Change Request](guides/architecture-change.md) - `/arckit:architecture-change`
+- [Architecture Repository](guides/architecture-repository.md) - `/arckit:architecture-repository`
+
+### AI Agent Architecture Overlay
+
+- [AI Agent Inventory](guides/agent-inventory.md) - `/arckit:agent-inventory`
+- [AI Agent Design](guides/agent-design.md) - `/arckit:agent-design`
+- [AI Agent Governance](guides/agent-governance.md) - `/arckit:agent-governance`
+- [AI Agent Integration](guides/agent-integration.md) - `/arckit:agent-integration`
+- [AI Agent Security](guides/agent-security.md) - `/arckit:agent-security`
+- [AI Agent Maturity](guides/agent-maturity.md) - `/arckit:agent-maturity`
+
 ### Governance
 
 - [Navigator](guides/navigator.md) - `/arckit:navigator` - Project-level GPS, recommended next command

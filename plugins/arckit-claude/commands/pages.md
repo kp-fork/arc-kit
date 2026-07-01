@@ -53,6 +53,8 @@ The following reference sections document the manifest structure and data tables
 | Discovery | requirements, stakeholders, stakeholder-analysis, research, datascout |
 | Planning | sobc, business-case, plan, roadmap, backlog, strategy |
 | Architecture | principles, adr, diagram, wardley, data-model, hld-review, dld-review, design-review, platform-design, data-mesh-contract, c4-layout-science |
+| TOGAF ADM Overlay | adm-preliminary, business-capability-map, application-inventory, application-rationalization, gap-analysis, transition-architecture, architecture-board, architecture-change, architecture-repository |
+| AI Agent Architecture Overlay | agent-inventory, agent-design, agent-governance, agent-integration, agent-security, agent-maturity |
 | Governance | risk, risk-management, traceability, principles-compliance, analyze, artifact-health, data-quality-framework, knowledge-compounding |
 | Compliance | tcop, secure, mod-secure, dpia, ai-playbook, atrs, jsp-936, service-assessment, govs-007-security, national-data-strategy, codes-of-practice, security-hooks |
 | Operations | devops, mlops, finops, servicenow, operationalize |
@@ -107,6 +109,7 @@ Add role guides to a separate `roleGuides` array in manifest.json (not the `guid
 | beta | Feature-complete | dpia, research, strategy, roadmap, adr, hld-review, dld-review, backlog, servicenow, analyze, service-assessment, tcop, secure, presentation, artifact-health, design-review, procurement, knowledge-compounding, c4-layout-science, security-hooks, codes-of-practice, data-quality-framework, govs-007-security, national-data-strategy, upgrading, start, conformance, productivity, remote-control, mcp-servers |
 | alpha | Working, limited testing | data-mesh-contract, ai-playbook, atrs, pages |
 | experimental | Early adopters | platform-design, wardley, azure-research, aws-research, gcp-research, datascout, dos, gcloud-search, gcloud-clarify, trello, devops, mlops, finops, operationalize, mod-secure, jsp-936, migration, pinecone-mcp |
+| community | Community-contributed overlay | adm-preliminary, business-capability-map, application-inventory, application-rationalization, gap-analysis, transition-architecture, architecture-board, architecture-change, architecture-repository, agent-inventory, agent-design, agent-governance, agent-integration, agent-security, agent-maturity |
 
 ### 1.2 Global Documents
 

@@ -140,6 +140,16 @@ const GUIDE_CATEGORIES = {
   'dld-review': 'Architecture', 'design-review': 'Architecture', 'platform-design': 'Architecture',
   'data-mesh-contract': 'Architecture', 'c4-layout-science': 'Architecture',
   'dfd': 'Architecture', 'framework': 'Architecture',
+  // Community — TOGAF ADM overlay
+  'adm-preliminary': 'TOGAF ADM Overlay', 'business-capability-map': 'TOGAF ADM Overlay',
+  'application-inventory': 'TOGAF ADM Overlay', 'application-rationalization': 'TOGAF ADM Overlay',
+  'gap-analysis': 'TOGAF ADM Overlay', 'transition-architecture': 'TOGAF ADM Overlay',
+  'architecture-board': 'TOGAF ADM Overlay', 'architecture-change': 'TOGAF ADM Overlay',
+  'architecture-repository': 'TOGAF ADM Overlay',
+  // Community — AI Agent Architecture overlay
+  'agent-inventory': 'AI Agent Architecture Overlay', 'agent-design': 'AI Agent Architecture Overlay',
+  'agent-governance': 'AI Agent Architecture Overlay', 'agent-integration': 'AI Agent Architecture Overlay',
+  'agent-security': 'AI Agent Architecture Overlay', 'agent-maturity': 'AI Agent Architecture Overlay',
   // Governance
   'risk': 'Governance', 'risk-management': 'Governance', 'traceability': 'Governance',
   'principles-compliance': 'Governance', 'analyze': 'Governance', 'artifact-health': 'Governance',
@@ -184,7 +194,7 @@ for (const name of ['plan','principles','stakeholders','stakeholder-analysis','r
 for (const name of ['dpia','research','strategy','roadmap','adr','hld-review','dld-review','backlog','servicenow','analyze','service-assessment','tcop','secure','presentation','artifact-health','design-review','procurement','knowledge-compounding','c4-layout-science','security-hooks','codes-of-practice','data-quality-framework','govs-007-security','national-data-strategy','upgrading','start','conformance','productivity','remote-control','mcp-servers','search','score','impact']) GUIDE_STATUS[name] = 'beta';
 for (const name of ['data-mesh-contract','ai-playbook','atrs','pages','template-builder']) GUIDE_STATUS[name] = 'alpha';
 for (const name of ['platform-design','wardley','azure-research','aws-research','gcp-research','datascout','dos','gcloud-search','gcloud-clarify','trello','devops','mlops','finops','operationalize','mod-secure','jsp-936','migration','pinecone-mcp','dfd','framework','health','maturity-model','glossary','init']) GUIDE_STATUS[name] = 'experimental';
-for (const name of ['eu-ai-act','eu-cra','eu-data-act','eu-dora','eu-dsa','eu-nis2','eu-rgpd','fr-algorithme-public','fr-anssi','fr-anssi-carto','fr-code-reuse','fr-dinum','fr-dr','fr-ebios','fr-marche-public','fr-pssi','fr-rgpd','fr-secnumcloud']) GUIDE_STATUS[name] = 'community';
+for (const name of ['eu-ai-act','eu-cra','eu-data-act','eu-dora','eu-dsa','eu-nis2','eu-rgpd','fr-algorithme-public','fr-anssi','fr-anssi-carto','fr-code-reuse','fr-dinum','fr-dr','fr-ebios','fr-marche-public','fr-pssi','fr-rgpd','fr-secnumcloud','adm-preliminary','business-capability-map','application-inventory','application-rationalization','gap-analysis','transition-architecture','architecture-board','architecture-change','architecture-repository','agent-inventory','agent-design','agent-governance','agent-integration','agent-security','agent-maturity']) GUIDE_STATUS[name] = 'community';
 
 const ROLE_FAMILIES = {
   'enterprise-architect': 'Architecture', 'solution-architect': 'Architecture',

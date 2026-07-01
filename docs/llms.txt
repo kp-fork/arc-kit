@@ -65,6 +65,27 @@ Every command reads a template from `.arckit/templates/`, creates or reuses a nu
 - [Wardley climate](https://arckit.org/guides/wardley-climate.md): `/arckit:wardley.climate`.
 - [Data mesh contract](https://arckit.org/guides/data-mesh-contract.md): `/arckit:data-mesh-contract`.
 
+### TOGAF ADM overlay (community-contributed)
+
+- [ADM Preliminary](https://arckit.org/guides/adm-preliminary.md): `/arckit:adm-preliminary` Architecture Vision, ADM scope, drivers, constraints, and success criteria.
+- [Business Capability Map](https://arckit.org/guides/business-capability-map.md): `/arckit:business-capability-map` capability hierarchy, value streams, maturity, and heatmap.
+- [Application Inventory](https://arckit.org/guides/application-inventory.md): `/arckit:application-inventory` application portfolio, strategic fit, dependencies, lifecycle, and capability mapping.
+- [Application Rationalization](https://arckit.org/guides/application-rationalization.md): `/arckit:application-rationalization` keep, merge, replace, retire portfolio decisions.
+- [TOGAF Gap Analysis](https://arckit.org/guides/gap-analysis.md): `/arckit:gap-analysis` capability gap matrix, severity scoring, workstream mapping, and risk linkage.
+- [Transition Architecture](https://arckit.org/guides/transition-architecture.md): `/arckit:transition-architecture` transition states, work packages, migration waves, and acceptance criteria.
+- [Architecture Board](https://arckit.org/guides/architecture-board.md): `/arckit:architecture-board` board charter, decision framework, scorecard, and exception process.
+- [Architecture Change Request](https://arckit.org/guides/architecture-change.md): `/arckit:architecture-change` Phase H change request, impact assessment, and ADM re-entry point.
+- [Architecture Repository](https://arckit.org/guides/architecture-repository.md): `/arckit:architecture-repository` standards register, pattern library, reference architectures, and reusable building blocks.
+
+### AI Agent Architecture overlay (community-contributed)
+
+- [AI Agent Inventory](https://arckit.org/guides/agent-inventory.md): `/arckit:agent-inventory` agent catalogue, capabilities, security classification, dependencies, and oversight level.
+- [AI Agent Design](https://arckit.org/guides/agent-design.md): `/arckit:agent-design` patterns, tool contracts, memory, orchestration, guardrails, and testing.
+- [AI Agent Governance](https://arckit.org/guides/agent-governance.md): `/arckit:agent-governance` oversight model, approvals, audit requirements, monitoring, escalation, and compliance mapping.
+- [AI Agent Integration](https://arckit.org/guides/agent-integration.md): `/arckit:agent-integration` inter-agent contracts, message protocol, shared state, failure isolation, and observability.
+- [AI Agent Security](https://arckit.org/guides/agent-security.md): `/arckit:agent-security` threat model, sandboxing, permissions, injection defences, output validation, and secrets.
+- [AI Agent Maturity](https://arckit.org/guides/agent-maturity.md): `/arckit:agent-maturity` design, governance, security, integration, and operations maturity roadmap.
+
 ### Governance and traceability
 
 - [Risk management](https://arckit.org/guides/risk-management.md): `/arckit:risk` HM Treasury Orange Book.
