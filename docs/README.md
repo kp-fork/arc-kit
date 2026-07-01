@@ -135,7 +135,27 @@ See the [full articles index](articles.html) for all ArcKit release notes, analy
 - [Statement of Work](guides/procurement.md) - `/arckit:sow`
 - [Vendor Evaluation](guides/evaluate.md) - `/arckit:evaluate`
 - [Vendor Scoring](guides/score.md) - `/arckit:score`
+- [Procurement Market Intelligence](guides/tenders.md) - `/arckit:tenders`
+- [Competitor Landscape Intelligence](guides/competitors.md) - `/arckit:competitors`
 - [Digital Marketplace](guides/uk-government/digital-marketplace.md) - `/arckit:gcloud-search`, `/arckit:gcloud-clarify`, `/arckit:dos`
+
+### UK G-Cloud Supplier Overlay
+
+- [G-Cloud Supplier Profile](guides/supplier-profile.md) - `/arckit:supplier-profile`
+- [G-Cloud Service Design](guides/service-design.md) - `/arckit:service-design`
+- [G-Cloud Lot 1 Service Definition](guides/sdd-lot1.md) - `/arckit:sdd-lot1`
+- [G-Cloud Lot 2 Service Definition](guides/sdd-lot2.md) - `/arckit:sdd-lot2`
+- [G-Cloud Lot 3 Service Definition](guides/sdd-lot3.md) - `/arckit:sdd-lot3`
+- [G-Cloud Supplier Declaration](guides/declaration.md) - `/arckit:declaration`
+- [G-Cloud Pricing](guides/pricing.md) - `/arckit:pricing`
+- [G-Cloud Security Assertions](guides/security.md) - `/arckit:security`
+- [G-Cloud Competitor Benchmark](guides/gcloud-competitors.md) - `/arckit:gcloud-competitors`
+- [G-Cloud Submission Review](guides/review.md) - `/arckit:review`
+- [G-Cloud Submission Pack](guides/submission-pack.md) - `/arckit:submission-pack`
+
+### FDE Site Generator
+
+- [FDE Site Generator](guides/create.md) - `/arckit-fde:create`
 
 ### Integrations
 

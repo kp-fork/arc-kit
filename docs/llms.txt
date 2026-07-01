@@ -195,7 +195,27 @@ French government (apply on top of EU baseline):
 - [Statement of Work](https://arckit.org/guides/procurement.md): `/arckit:sow`.
 - [Vendor evaluation](https://arckit.org/guides/evaluate.md): `/arckit:evaluate`.
 - [Vendor scoring](https://arckit.org/guides/score.md): `/arckit:score`.
+- [Procurement Market Intelligence](https://arckit.org/guides/tenders.md): `/arckit:tenders` UK tender award benchmarks, suppliers, incumbency, and concentration analysis.
+- [Competitor Landscape Intelligence](https://arckit.org/guides/competitors.md): `/arckit:competitors` rival suppliers, awarded-value share, head-to-head comparison, and concentration analysis.
 - [Digital Marketplace (G-Cloud, DOS)](https://arckit.org/guides/uk-government/digital-marketplace.md): `/arckit:gcloud-search`, `/arckit:gcloud-clarify`, `/arckit:dos`.
+
+### UK G-Cloud supplier overlay
+
+- [G-Cloud Supplier Profile](https://arckit.org/guides/supplier-profile.md): `/arckit:supplier-profile` supplier-wide company, contact, certification, insurance, security, and evidence profile.
+- [G-Cloud Service Design](https://arckit.org/guides/service-design.md): `/arckit:service-design` per-service offer design, project setup, lot selection, features, benefits, and support model.
+- [G-Cloud Lot 1 Service Definition](https://arckit.org/guides/sdd-lot1.md): `/arckit:sdd-lot1` cloud hosting, IaaS, PaaS, regions, tenancy, resilience, support, and security.
+- [G-Cloud Lot 2 Service Definition](https://arckit.org/guides/sdd-lot2.md): `/arckit:sdd-lot2` cloud software and SaaS capability, integrations, data, onboarding, support, and buyer claims.
+- [G-Cloud Lot 3 Service Definition](https://arckit.org/guides/sdd-lot3.md): `/arckit:sdd-lot3` cloud support, migration, consulting, delivery method, roles, outcomes, and handover.
+- [G-Cloud Supplier Declaration](https://arckit.org/guides/declaration.md): `/arckit:declaration` supplier declaration evidence pack for exclusions, insurance, modern slavery, tax, and sign-off.
+- [G-Cloud Pricing](https://arckit.org/guides/pricing.md): `/arckit:pricing` pricing model, tiers, units, discounts, trials, assumptions, and benchmark rationale.
+- [G-Cloud Security Assertions](https://arckit.org/guides/security.md): `/arckit:security` NCSC Cloud Security Principles assertions, evidence, residual risks, and buyer-facing security statements.
+- [G-Cloud Competitor Benchmark](https://arckit.org/guides/gcloud-competitors.md): `/arckit:gcloud-competitors` marketplace rival comparison across features, pricing, differentiation, and improvement actions.
+- [G-Cloud Submission Review](https://arckit.org/guides/review.md): `/arckit:review` completeness, cross-document consistency, marketplace limits, evidence gaps, and readiness actions.
+- [G-Cloud Submission Pack](https://arckit.org/guides/submission-pack.md): `/arckit:submission-pack` export approved supplier and service artefacts into a submission folder with manifest and checklist.
+
+### FDE site generator
+
+- [FDE Site Generator](https://arckit.org/guides/create.md): `/arckit-fde:create` generate a brandable Forward Deploy Engineering consulting website into docs/.
 
 ### Cloud research integrations
 

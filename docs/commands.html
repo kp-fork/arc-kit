@@ -545,6 +545,8 @@
                 <li><strong>Tier = Community + Jurisdiction = USA</strong> → <code>arckit-us</code></li>
                 <li><strong>Tier = Community + Sector = UK Finance</strong> → <code>arckit-uk-finance</code> — payments slice (v1)</li>
                 <li><strong>Tier = Community + Sector = UK NHS</strong> → <code>arckit-uk-nhs</code> — clinical safety + medical-device classification</li>
+                <li><strong>Tier = Community + Category = UK G-Cloud Supplier</strong> → <code>arckit-uk-gcloud</code> — supplier-side bid authoring and submission pack</li>
+                <li><strong>Tier = Community + Category = FDE Site Generator</strong> → <code>arckit-fde</code> — Forward Deploy Engineering website generator</li>
                 <li><strong>Tier = Community + Category = TOGAF ADM</strong> → <code>arckit-togaf-adm</code> — ADM lifecycle and architecture repository</li>
                 <li><strong>Tier = Community + Category = AI Agent Architecture</strong> → <code>arckit-agent-architecture</code> — agent inventory, design, governance, integration, security, and maturity</li>
             </ul>
@@ -600,6 +602,8 @@
                     <option value="quality-compliance">Quality &amp; Compliance</option>
                     <option value="reporting">Reporting</option>
                     <option value="utility">Utility</option>
+                    <option value="uk-gcloud-overlay">UK G-Cloud Supplier Overlay (Community, Supplier)</option>
+                    <option value="fde-site-generator">FDE Site Generator (Community)</option>
                     <option value="togaf-adm-overlay">TOGAF ADM Overlay (Community, Method)</option>
                     <option value="agent-architecture-overlay">AI Agent Architecture Overlay (Community, Method)</option>
                     <option value="ca-overlay">Canada Federal Overlay (Community)</option>
@@ -1198,6 +1202,24 @@
                         <td>Core</td>
                         <td class="examples">—</td>
                         <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="beta" data-category="procurement" data-jurisdiction="uk" data-tier="core">
+                        <td><code>/arckit:tenders</code></td>
+                        <td class="description">Discover procurement market intelligence from UK tenders, including benchmarks, suppliers, incumbency, concentration, and awarded-value caveats</td>
+                        <td>Procurement</td>
+                        <td>UK</td>
+                        <td>Core</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-beta">Beta</span></td>
+                    </tr>
+                    <tr data-status="beta" data-category="procurement" data-jurisdiction="uk" data-tier="core">
+                        <td><code>/arckit:competitors</code></td>
+                        <td class="description">Analyze competitor landscape intelligence from UK procurement awards, including rival suppliers, market share, head-to-head comparison, and concentration</td>
+                        <td>Procurement</td>
+                        <td>UK</td>
+                        <td>Core</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-beta">Beta</span></td>
                     </tr>
                     <tr data-status="live" data-category="procurement" data-jurisdiction="generic" data-tier="core">
                         <td><code>/arckit:evaluate</code></td>
@@ -2289,6 +2311,114 @@
                         <td>UK Finance</td>
                         <td>Community</td>
                         <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="fde-site-generator" data-jurisdiction="generic" data-tier="community">
+                        <td><code>/arckit-fde:create</code></td>
+                        <td class="description">[COMMUNITY] Generate a brandable, GitHub-Pages-ready Forward Deploy Engineering consulting website into docs/ with saved site configuration.</td>
+                        <td>FDE Site Generator</td>
+                        <td>Generic</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="uk-gcloud-overlay" data-jurisdiction="uk" data-tier="community">
+                        <td><code>/arckit:supplier-profile</code></td>
+                        <td class="description">[COMMUNITY] Create or update the reusable supplier profile for G-Cloud submissions, including company details, contacts, certifications, insurance, and evidence.</td>
+                        <td>UK G-Cloud Supplier Overlay</td>
+                        <td>UK</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="uk-gcloud-overlay" data-jurisdiction="uk" data-tier="community">
+                        <td><code>/arckit:service-design</code></td>
+                        <td class="description">[COMMUNITY] Design a cloud service offering for the G-Cloud marketplace and create the per-service ArcKit project and service design artefact.</td>
+                        <td>UK G-Cloud Supplier Overlay</td>
+                        <td>UK</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="uk-gcloud-overlay" data-jurisdiction="uk" data-tier="community">
+                        <td><code>/arckit:sdd-lot1</code></td>
+                        <td class="description">[COMMUNITY] Generate the Service Definition Document for a Lot 1 cloud hosting, IaaS, or PaaS service.</td>
+                        <td>UK G-Cloud Supplier Overlay</td>
+                        <td>UK</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="uk-gcloud-overlay" data-jurisdiction="uk" data-tier="community">
+                        <td><code>/arckit:sdd-lot2</code></td>
+                        <td class="description">[COMMUNITY] Generate the Service Definition Document for a Lot 2 cloud software or SaaS service.</td>
+                        <td>UK G-Cloud Supplier Overlay</td>
+                        <td>UK</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="uk-gcloud-overlay" data-jurisdiction="uk" data-tier="community">
+                        <td><code>/arckit:sdd-lot3</code></td>
+                        <td class="description">[COMMUNITY] Generate the Service Definition Document for a Lot 3 cloud support, migration, consulting, training, or managed service.</td>
+                        <td>UK G-Cloud Supplier Overlay</td>
+                        <td>UK</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="uk-gcloud-overlay" data-jurisdiction="uk" data-tier="community">
+                        <td><code>/arckit:declaration</code></td>
+                        <td class="description">[COMMUNITY] Generate the supplier declaration evidence pack for a G-Cloud framework submission.</td>
+                        <td>UK G-Cloud Supplier Overlay</td>
+                        <td>UK</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="uk-gcloud-overlay" data-jurisdiction="uk" data-tier="community">
+                        <td><code>/arckit:pricing</code></td>
+                        <td class="description">[COMMUNITY] Generate a G-Cloud pricing document aligned to the service design, SDD, support model, and market evidence.</td>
+                        <td>UK G-Cloud Supplier Overlay</td>
+                        <td>UK</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="uk-gcloud-overlay" data-jurisdiction="uk" data-tier="community">
+                        <td><code>/arckit:security</code></td>
+                        <td class="description">[COMMUNITY] Generate NCSC Cloud Security Principles assertions and evidence for a G-Cloud service.</td>
+                        <td>UK G-Cloud Supplier Overlay</td>
+                        <td>UK</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="uk-gcloud-overlay" data-jurisdiction="uk" data-tier="community">
+                        <td><code>/arckit:gcloud-competitors</code></td>
+                        <td class="description">[COMMUNITY] Benchmark a G-Cloud service against Digital Marketplace rivals with feature, price, and positioning analysis.</td>
+                        <td>UK G-Cloud Supplier Overlay</td>
+                        <td>UK</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="uk-gcloud-overlay" data-jurisdiction="uk" data-tier="community">
+                        <td><code>/arckit:review</code></td>
+                        <td class="description">[COMMUNITY] Review a G-Cloud service submission for completeness, consistency, evidence gaps, marketplace limits, and readiness before CCS submission.</td>
+                        <td>UK G-Cloud Supplier Overlay</td>
+                        <td>UK</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="uk-gcloud-overlay" data-jurisdiction="uk" data-tier="community">
+                        <td><code>/arckit:submission-pack</code></td>
+                        <td class="description">[COMMUNITY] Bundle approved supplier and service documents into a G-Cloud submission folder with a manifest and pre-submission checklist.</td>
+                        <td>UK G-Cloud Supplier Overlay</td>
+                        <td>UK</td>
+                        <td>Community</td>
+                        <td class="examples">&mdash;</td>
                         <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
                     </tr>
                     <tr data-status="experimental" data-category="togaf-adm-overlay" data-jurisdiction="togaf-adm" data-tier="community">
