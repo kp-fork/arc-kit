@@ -199,6 +199,8 @@ French government (apply on top of EU baseline):
 
 Published articles, newest first:
 
+- [ArcKit TOGAF ADM: The Method Becomes a Governed Workflow](https://arckit.org/article-viewer.html?a=2026-07-01-arckit-togaf-adm): Release / 1 July 2026.
+- [ArcKit AI Agent Architecture: Governed Design for Autonomous Systems](https://arckit.org/article-viewer.html?a=2026-06-30-arckit-agent-architecture): Release / 30 June 2026.
 - [I Built ArcKit for Myself. Thank You for Using It.](https://arckit.org/article-viewer.html?a=2026-06-29-arckit-usage-signals): Community / 29 June 2026.
 - [ArcKit and OKF: knowledge interoperability without giving up governance](https://arckit.org/article-viewer.html?a=2026-06-19-okf-compatibility-workflows): Analysis / 19 June 2026.
 - [ArcKit Self-Harness: when the governance harness starts improving itself](https://arckit.org/article-viewer.html?a=2026-06-19-self-harness-autoresearch): Technical / 19 June 2026.

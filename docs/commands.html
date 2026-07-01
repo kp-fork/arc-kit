@@ -13,19 +13,19 @@
     </script>
     <script>(function(){var t=localStorage.getItem('arckit-theme');if(t==='dark')document.documentElement.classList.add('dark-mode');else if(t==='light')document.documentElement.classList.add('light-mode');else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.classList.add('dark-mode')})();</script>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="ArcKit AI harness command reference: enterprise architecture commands for requirements, risk, ADRs, diagrams, Wardley maps, procurement, compliance overlays, and dependency order.">
+    <meta name="description" content="ArcKit AI harness command reference: enterprise architecture commands for requirements, risk, ADRs, diagrams, Wardley maps, procurement, TOGAF ADM, AI agent architecture, compliance overlays, and dependency order.">
     <title>ArcKit Command Reference | AI Architecture Commands</title>
     <meta name="keywords" content="ArcKit commands, enterprise architecture commands, AI architecture commands, governance toolkit, command reference, dependency matrix, architecture compliance overlays">
     <meta name="author" content="ArcKit">
     <meta property="og:title" content="ArcKit Command Reference | AI Architecture Commands">
-    <meta property="og:description" content="Browse ArcKit AI commands for enterprise architecture governance, dependency order, UK Government baseline workflows, and community compliance overlays.">
+    <meta property="og:description" content="Browse ArcKit AI commands for enterprise architecture governance, dependency order, UK Government baseline workflows, TOGAF ADM, AI agent architecture, and community compliance overlays.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://arckit.org/commands.html">
     <meta property="og:site_name" content="ArcKit">
     <meta property="og:image" content="https://arckit.org/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ArcKit Command Reference | AI Architecture Commands">
-    <meta name="twitter:description" content="Browse ArcKit AI commands for enterprise architecture governance, dependency order, UK Government baseline workflows, and community compliance overlays.">
+    <meta name="twitter:description" content="Browse ArcKit AI commands for enterprise architecture governance, dependency order, UK Government baseline workflows, TOGAF ADM, AI agent architecture, and community compliance overlays.">
     <meta name="twitter:image" content="https://arckit.org/og-image.png">
     <link rel="canonical" href="https://arckit.org/commands.html">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -474,7 +474,7 @@
                 "@type": "WebPage",
                 "@id": "https://arckit.org/commands.html",
                 "name": "ArcKit Command Reference | AI Architecture Commands",
-                "description": "ArcKit AI harness command reference: enterprise architecture commands for requirements, risk, ADRs, diagrams, Wardley maps, procurement, compliance overlays, and dependency order.",
+                "description": "ArcKit AI harness command reference: enterprise architecture commands for requirements, risk, ADRs, diagrams, Wardley maps, procurement, TOGAF ADM, AI agent architecture, compliance overlays, and dependency order.",
                 "isPartOf": { "@type": "WebSite", "name": "ArcKit", "url": "https://arckit.org" }
             },
             {
@@ -533,7 +533,7 @@
         <p class="govuk-body">Popular starting points: <a href="getting-started.html" class="govuk-link">install ArcKit</a>, follow the <a href="guides.html" class="govuk-link">step-by-step command guides</a>, or filter this table by jurisdiction, status, category, and dependency tier.</p>
 
         <div class="govuk-inset-text">
-            <p class="govuk-body"><strong>Which plugin ships which command?</strong> ArcKit splits across 9 marketplace plugins. The <strong>Tier</strong> column tells you whether a command ships in <code>arckit</code> (Core) or in one of the 8 community plugins:</p>
+            <p class="govuk-body"><strong>Which plugin ships which command?</strong> ArcKit's Claude Code marketplace includes the core plugin plus regional, sector, supplier, and method overlays. The <strong>Tier</strong> column tells you whether a command ships in <code>arckit</code> (Core) or in a community overlay plugin:</p>
             <ul class="govuk-list govuk-list--bullet">
                 <li><strong>Tier = Core</strong> → ships in <code>arckit</code></li>
                 <li><strong>Tier = Community + Jurisdiction = UAE</strong> → <code>arckit-uae</code></li>
@@ -545,6 +545,8 @@
                 <li><strong>Tier = Community + Jurisdiction = USA</strong> → <code>arckit-us</code></li>
                 <li><strong>Tier = Community + Sector = UK Finance</strong> → <code>arckit-uk-finance</code> — payments slice (v1)</li>
                 <li><strong>Tier = Community + Sector = UK NHS</strong> → <code>arckit-uk-nhs</code> — clinical safety + medical-device classification</li>
+                <li><strong>Tier = Community + Category = TOGAF ADM</strong> → <code>arckit-togaf-adm</code> — ADM lifecycle and architecture repository</li>
+                <li><strong>Tier = Community + Category = AI Agent Architecture</strong> → <code>arckit-agent-architecture</code> — agent inventory, design, governance, integration, security, and maturity</li>
             </ul>
             <p class="govuk-body">Install only what you need: <code>claude plugin install arckit arckit-uae</code> picks up core + UAE. Community plugins auto-install <code>arckit</code> as a declared dependency. See <a href="getting-started.html#step-2" class="govuk-link">Getting Started</a> for install snippets.</p>
         </div>
@@ -598,6 +600,8 @@
                     <option value="quality-compliance">Quality &amp; Compliance</option>
                     <option value="reporting">Reporting</option>
                     <option value="utility">Utility</option>
+                    <option value="togaf-adm-overlay">TOGAF ADM Overlay (Community, Method)</option>
+                    <option value="agent-architecture-overlay">AI Agent Architecture Overlay (Community, Method)</option>
                     <option value="ca-overlay">Canada Federal Overlay (Community)</option>
                     <option value="uae-overlay">UAE Federal Overlay (Community)</option>
                     <option value="eu-overlay">EU Regulatory Overlay (Community)</option>
@@ -614,6 +618,8 @@
                 <select id="jurisdiction-filter">
                     <option value="all">All jurisdictions</option>
                     <option value="generic">Generic</option>
+                    <option value="togaf-adm">TOGAF ADM (method)</option>
+                    <option value="agent-architecture">AI Agent Architecture (method)</option>
                     <option value="uk">UK</option>
                     <option value="eu">EU</option>
                     <option value="france">France</option>
@@ -2281,6 +2287,141 @@
                         <td class="description">[COMMUNITY] Generate a Critical Third Parties (CTP) dependency assessment — register of designated CTPs the firm relies on (cloud hyperscalers, payment networks, BaaS providers), materiality assessment per provider, resilience testing plan including exit and substitution drills (BoE/PRA/FCA PS24/16).</td>
                         <td>UK Finance Payments Overlay</td>
                         <td>UK Finance</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="togaf-adm-overlay" data-jurisdiction="togaf-adm" data-tier="community">
+                        <td><code>/arckit:adm-preliminary</code></td>
+                        <td class="description">[COMMUNITY] TOGAF ADM Preliminary phase and architecture vision: scope, drivers, constraints, governance context, and initial ADM framing.</td>
+                        <td>TOGAF ADM Overlay</td>
+                        <td>TOGAF ADM</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="togaf-adm-overlay" data-jurisdiction="togaf-adm" data-tier="community">
+                        <td><code>/arckit:business-capability-map</code></td>
+                        <td class="description">[COMMUNITY] TOGAF Phase A business architecture: capability hierarchy, value chains, maturity, ownership, and strategic alignment.</td>
+                        <td>TOGAF ADM Overlay</td>
+                        <td>TOGAF ADM</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="togaf-adm-overlay" data-jurisdiction="togaf-adm" data-tier="community">
+                        <td><code>/arckit:application-inventory</code></td>
+                        <td class="description">[COMMUNITY] TOGAF Phase C application architecture inventory: portfolio, lifecycle, ownership, integration patterns, and technical fit.</td>
+                        <td>TOGAF ADM Overlay</td>
+                        <td>TOGAF ADM</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="togaf-adm-overlay" data-jurisdiction="togaf-adm" data-tier="community">
+                        <td><code>/arckit:application-rationalization</code></td>
+                        <td class="description">[COMMUNITY] Application rationalization decisions: retain, retire, replace, consolidate, remediate, or invest, with portfolio evidence and transition rationale.</td>
+                        <td>TOGAF ADM Overlay</td>
+                        <td>TOGAF ADM</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="togaf-adm-overlay" data-jurisdiction="togaf-adm" data-tier="community">
+                        <td><code>/arckit:gap-analysis</code></td>
+                        <td class="description">[COMMUNITY] TOGAF Phase E gap analysis: baseline-to-target gaps, impacts, dependencies, work packages, and prioritised opportunities and solutions.</td>
+                        <td>TOGAF ADM Overlay</td>
+                        <td>TOGAF ADM</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="togaf-adm-overlay" data-jurisdiction="togaf-adm" data-tier="community">
+                        <td><code>/arckit:transition-architecture</code></td>
+                        <td class="description">[COMMUNITY] TOGAF Phase F migration planning: transition states, work packages, sequencing, dependencies, and implementation roadmap.</td>
+                        <td>TOGAF ADM Overlay</td>
+                        <td>TOGAF ADM</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="togaf-adm-overlay" data-jurisdiction="togaf-adm" data-tier="community">
+                        <td><code>/arckit:architecture-board</code></td>
+                        <td class="description">[COMMUNITY] TOGAF Phase G implementation governance: architecture board charter, compliance review, decision log, exception handling, and review cadence.</td>
+                        <td>TOGAF ADM Overlay</td>
+                        <td>TOGAF ADM</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="togaf-adm-overlay" data-jurisdiction="togaf-adm" data-tier="community">
+                        <td><code>/arckit:architecture-change</code></td>
+                        <td class="description">[COMMUNITY] TOGAF Phase H architecture change management: change request, impact assessment, approvals, and ADM re-entry recommendation.</td>
+                        <td>TOGAF ADM Overlay</td>
+                        <td>TOGAF ADM</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="togaf-adm-overlay" data-jurisdiction="togaf-adm" data-tier="community">
+                        <td><code>/arckit:architecture-repository</code></td>
+                        <td class="description">[COMMUNITY] Architecture repository synthesis: patterns, standards, reference architectures, reusable decisions, lessons learned, and governance assets.</td>
+                        <td>TOGAF ADM Overlay</td>
+                        <td>TOGAF ADM</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="agent-architecture-overlay" data-jurisdiction="agent-architecture" data-tier="community">
+                        <td><code>/arckit:agent-inventory</code></td>
+                        <td class="description">[COMMUNITY] AI agent inventory: agent register, capability matrix, dependency map, lifecycle, security classification, and human oversight level.</td>
+                        <td>AI Agent Architecture Overlay</td>
+                        <td>AI Agent Architecture</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="agent-architecture-overlay" data-jurisdiction="agent-architecture" data-tier="community">
+                        <td><code>/arckit:agent-design</code></td>
+                        <td class="description">[COMMUNITY] Agent architecture specification: purpose, autonomy boundary, memory model, tool access, fallback behaviour, and design decisions.</td>
+                        <td>AI Agent Architecture Overlay</td>
+                        <td>AI Agent Architecture</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="agent-architecture-overlay" data-jurisdiction="agent-architecture" data-tier="community">
+                        <td><code>/arckit:agent-governance</code></td>
+                        <td class="description">[COMMUNITY] Agent governance framework: oversight model, approval workflow, audit trail, intervention points, operating controls, and review cadence.</td>
+                        <td>AI Agent Architecture Overlay</td>
+                        <td>AI Agent Architecture</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="agent-architecture-overlay" data-jurisdiction="agent-architecture" data-tier="community">
+                        <td><code>/arckit:agent-integration</code></td>
+                        <td class="description">[COMMUNITY] Agent integration architecture: inter-agent contracts, orchestration, shared state, message protocols, failure isolation, and observability.</td>
+                        <td>AI Agent Architecture Overlay</td>
+                        <td>AI Agent Architecture</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="agent-architecture-overlay" data-jurisdiction="agent-architecture" data-tier="community">
+                        <td><code>/arckit:agent-security</code></td>
+                        <td class="description">[COMMUNITY] Agent security architecture: sandboxing, permission model, data access, threat paths, prompt-injection controls, isolation, and hardening.</td>
+                        <td>AI Agent Architecture Overlay</td>
+                        <td>AI Agent Architecture</td>
+                        <td>Community</td>
+                        <td class="examples">—</td>
+                        <td><span class="app-status-tag app-status-experimental">Experimental</span></td>
+                    </tr>
+                    <tr data-status="experimental" data-category="agent-architecture-overlay" data-jurisdiction="agent-architecture" data-tier="community">
+                        <td><code>/arckit:agent-maturity</code></td>
+                        <td class="description">[COMMUNITY] Agent programme maturity assessment: maturity scoring, capability gaps, governance improvements, roadmap, and continuous-improvement actions.</td>
+                        <td>AI Agent Architecture Overlay</td>
+                        <td>AI Agent Architecture</td>
                         <td>Community</td>
                         <td class="examples">—</td>
                         <td><span class="app-status-tag app-status-experimental">Experimental</span></td>

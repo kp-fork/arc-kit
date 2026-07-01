@@ -15,8 +15,9 @@ Complete documentation for ArcKit — The Enterprise Architecture Governance Har
 
 ## Articles
 
-- [ArcKit and OKF: knowledge interoperability without giving up governance](article-viewer.html?a=2026-06-19-okf-compatibility-workflows)
-- [ArcKit Self-Harness: when the governance harness starts improving itself](article-viewer.html?a=2026-06-19-self-harness-autoresearch)
+- [ArcKit TOGAF ADM: The Method Becomes a Governed Workflow](article-viewer.html?a=2026-07-01-arckit-togaf-adm)
+- [ArcKit AI Agent Architecture: Governed Design for Autonomous Systems](article-viewer.html?a=2026-06-30-arckit-agent-architecture)
+- [I Built ArcKit for Myself. Thank You for Using It.](article-viewer.html?a=2026-06-29-arckit-usage-signals)
 
 See the [full articles index](articles.html) for all ArcKit release notes, analysis, and essays.
 
